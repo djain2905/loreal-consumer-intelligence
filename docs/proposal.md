@@ -14,6 +14,8 @@
 
 **Link:** https://www.wayup.com/i-Consumer-Goods-j-2026-LOreal-USA-Commercial-Management-Trainee-Program-LOreal-191011435582500/
 
+> Note: This posting is from the 2026 cycle of the Commercial Management Trainee Program; the 2027 cycle has not yet been posted and is expected to go live in summer 2026 — however, based on past trends, the program requirements remain consistent year over year, particularly for the data analysis and consumer insights responsibilities.
+
 **SQL requirement (quote the posting):** "Generate insights and viable recommendations through data analysis across multiple sources" and "Work with internal data to generate accurate forecasting of sales volume and new client acquisitions." SQL is the foundational skill that makes these responsibilities executable — aggregating review data by product category, filtering by brand and price tier, joining product metadata to consumer sentiment, and computing demand signals from structured datasets are all SQL operations. The dbt + Snowflake layer in this project uses real SQL; the pandas layer functions as SQL for filtering and aggregation.
 
 ---
