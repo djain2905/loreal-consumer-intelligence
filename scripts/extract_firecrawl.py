@@ -1,70 +1,36 @@
 import os
-import snowflake.connector
+from datetime import date
+from pathlib import Path
+
 from dotenv import load_dotenv
 from firecrawl import FirecrawlApp
 
 load_dotenv()
 
-# ── Initialize Firecrawl ──
 app = FirecrawlApp(api_key=os.getenv("FIRECRAWL_API_KEY"))
 
-# ── Scrape Lancôme product catalog ──
-print("Scraping Lancôme product catalog via Firecrawl...")
+RAW_DIR = Path(__file__).parent.parent / "knowledge" / "raw"
+RAW_DIR.mkdir(parents=True, exist_ok=True)
 
-result = app.scrape(
-    "https://www.lancome-usa.com/makeup",
-    formats=["markdown"]
-)
+today = date.today().isoformat()
 
-# Extract the markdown content
-content = result.markdown or ""
-print(f"✅ Scraped {len(content)} characters from Lancôme")
+SOURCES = [
+    ("lancome-makeup-catalog", "https://www.lancome-usa.com/makeup"),
+    ("lancome-skincare-catalog", "https://www.lancome-usa.com/skincare"),
+    ("loreal-press-releases", "https://www.loreal.com/en/articles/"),
+]
 
-# ── Parse into rows ──
-rows = []
-for i, line in enumerate(content.split("\n")):
-    line = line.strip()
-    if line:
-        rows.append((
-            i,
-            "lancome_makeup_catalog",
-            "https://www.lancome-usa.com/makeup",
-            line[:5000]
-        ))
 
-print(f"Parsed {len(rows)} content rows")
+def scrape_to_file(slug: str, url: str) -> None:
+    print(f"Scraping {url} ...")
+    result = app.scrape(url, formats=["markdown"])
+    content = result.markdown or ""
+    filename = RAW_DIR / f"{slug}-{today}.md"
+    filename.write_text(content, encoding="utf-8")
+    print(f"  saved → {filename.relative_to(Path(__file__).parent.parent)}  ({len(content):,} chars)")
 
-# ── Connect to Snowflake ──
-conn = snowflake.connector.connect(
-    account=os.getenv("SNOWFLAKE_ACCOUNT"),
-    user=os.getenv("SNOWFLAKE_USER"),
-    password=os.getenv("SNOWFLAKE_PASSWORD"),
-    warehouse=os.getenv("SNOWFLAKE_WAREHOUSE"),
-    database="LOREAL_DB",
-    schema="RAW"
-)
 
-cursor = conn.cursor()
+for slug, url in SOURCES:
+    scrape_to_file(slug, url)
 
-# ── Create table ──
-cursor.execute("""
-    CREATE OR REPLACE TABLE RAW.LANCOME_CATALOG (
-        LINE_NUMBER NUMBER,
-        SOURCE VARCHAR,
-        URL VARCHAR,
-        CONTENT VARCHAR
-    )
-""")
-
-print("✅ Table created in Snowflake!")
-
-# ── Insert rows ──
-cursor.executemany("""
-    INSERT INTO RAW.LANCOME_CATALOG (LINE_NUMBER, SOURCE, URL, CONTENT)
-    VALUES (%s, %s, %s, %s)
-""", rows)
-
-print(f"✅ {len(rows)} rows loaded into Snowflake RAW.LANCOME_CATALOG!")
-
-cursor.close()
-conn.close()
+print("Done.")
