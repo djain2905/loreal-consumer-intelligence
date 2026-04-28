@@ -1,0 +1,23 @@
+name: loreal_consumer_intelligence
+version: '1.0.0'
+config-version: 2
+
+profile: loreal_consumer_intelligence
+
+model-paths: ["models"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  loreal_consumer_intelligence:
+    +meta:
+      owner: dhwanijain2905@gmail.com
+      project: Lancôme Consumer Intelligence
+    staging:
+      +materialized: view
+      +schema: staging
+      +tags: ["staging", "sephora"]
+    mart:
+      +materialized: table
+      +schema: mart
+      +tags: ["mart", "consumer_intelligence"]

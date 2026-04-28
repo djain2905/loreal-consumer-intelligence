@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: stg_sephora_reviews
+    description: >
+      Cleaned review-level rows from RAW.SEPHORA_REVIEWS. One row per unique review
+      after deduplication on (author_id, product_id, submission_time, review_text).
+      Casts types and standardizes column names for downstream mart models.
+    config:
+      meta:
+        owner: dhwanijain2905@gmail.com
+        grain: one row per review
+        source: Kaggle — Sephora Products and Skincare Reviews
+    columns:
+      - name: review_id
+        description: MD5 surrogate key derived from author_id, product_id, submission_time, and review_text.
+        tests:
+          - not_null
+          - unique
+      - name: product_id
+        description: Sephora product identifier.
+        tests:
+          - not_null
+      - name: author_id
+        description: Sephora reviewer identifier.
+        tests:
+          - not_null
+      - name: rating
+        description: Star rating 1–5, cast to integer.
+        tests:
+          - not_null
+      - name: review_date
+        description: Submission date cast from raw submission_time string.
+      - name: is_recommended
+        description: Boolean — reviewer recommends the product.
+      - name: review_title
+        description: Short title the reviewer gave to their review.
+      - name: review_text
+        description: Full review body text. Primary field for NLP and desire language detection.
+      - name: skin_tone
+        description: Self-reported skin tone of the reviewer.
+      - name: skin_type
+        description: Self-reported skin type (oily, dry, combination, normal, sensitive).
+
+  - name: stg_sephora_products
+    description: >
+      One row per product, deduplicated from RAW.SEPHORA_REVIEWS using the most recent
+      submission. Extracts product metadata and adds a price_tier classification.
+    config:
+      meta:
+        owner: dhwanijain2905@gmail.com
+        grain: one row per product
+        source: Kaggle — Sephora Products and Skincare Reviews
+    columns:
+      - name: product_id
+        description: Sephora product identifier. Natural key.
+        tests:
+          - not_null
+          - unique
+      - name: product_name
+        description: Display name of the product.
+        tests:
+          - not_null
+      - name: brand_name
+        description: Brand name as it appears on Sephora.
+      - name: price_usd
+        description: Product retail price in USD.
+      - name: price_tier
+        description: budget (<$25), mid ($25–$50), premium (>$50).
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['budget', 'mid', 'premium']

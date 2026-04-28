@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw
+    database: LOREAL_DB
+    schema: RAW
+    tables:
+      - name: sephora_reviews
+        description: Raw Sephora product reviews and product info from Kaggle
+      - name: lancome_catalog
+        description: Raw Lancôme product catalog scraped via Firecrawl
