@@ -51,22 +51,26 @@ def style(fig, height: int = 420):
 # ── Connection ─────────────────────────────────────────────────────────────────
 @st.cache_resource
 def get_conn():
-    try:
-        # Streamlit Cloud: reads from secrets manager
-        creds = st.secrets["snowflake"]
-    except (KeyError, FileNotFoundError):
-        # Local development: reads from .env
-        creds = {
-            "account":   os.getenv("SNOWFLAKE_ACCOUNT"),
-            "user":      os.getenv("SNOWFLAKE_USER"),
-            "password":  os.getenv("SNOWFLAKE_PASSWORD"),
-            "warehouse": os.getenv("SNOWFLAKE_WAREHOUSE"),
-        }
+    if "snowflake" in st.secrets:
+        account   = st.secrets["snowflake"]["account"]
+        user      = st.secrets["snowflake"]["user"]
+        password  = st.secrets["snowflake"]["password"]
+        warehouse = st.secrets["snowflake"]["warehouse"]
+    else:
+        account   = os.getenv("SNOWFLAKE_ACCOUNT")
+        user      = os.getenv("SNOWFLAKE_USER")
+        password  = os.getenv("SNOWFLAKE_PASSWORD")
+        warehouse = os.getenv("SNOWFLAKE_WAREHOUSE")
+
+    if not account:
+        st.error("Snowflake credentials not found. Add them under App Settings → Secrets.")
+        st.stop()
+
     return snowflake.connector.connect(
-        account=creds["account"],
-        user=creds["user"],
-        password=creds["password"],
-        warehouse=creds["warehouse"],
+        account=account,
+        user=user,
+        password=password,
+        warehouse=warehouse,
         database="LOREAL_DB",
     )
 
