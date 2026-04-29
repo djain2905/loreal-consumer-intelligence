@@ -1,5 +1,6 @@
 streamlit
-snowflake-connector-python
+snowflake-connector-python[pandas]
+pyarrow
 pandas
 plotly
 scikit-learn
