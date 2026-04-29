@@ -52,20 +52,23 @@ def style(fig, height: int = 420):
 @st.cache_resource
 def get_conn():
     try:
-        s = st.secrets["snowflake"]
-        return snowflake.connector.connect(
-            account=s["account"], user=s["user"],
-            password=s["password"], warehouse=s["warehouse"],
-            database="LOREAL_DB",
-        )
-    except Exception:
-        return snowflake.connector.connect(
-            account=os.getenv("SNOWFLAKE_ACCOUNT"),
-            user=os.getenv("SNOWFLAKE_USER"),
-            password=os.getenv("SNOWFLAKE_PASSWORD"),
-            warehouse=os.getenv("SNOWFLAKE_WAREHOUSE"),
-            database="LOREAL_DB",
-        )
+        # Streamlit Cloud: reads from secrets manager
+        creds = st.secrets["snowflake"]
+    except (KeyError, FileNotFoundError):
+        # Local development: reads from .env
+        creds = {
+            "account":   os.getenv("SNOWFLAKE_ACCOUNT"),
+            "user":      os.getenv("SNOWFLAKE_USER"),
+            "password":  os.getenv("SNOWFLAKE_PASSWORD"),
+            "warehouse": os.getenv("SNOWFLAKE_WAREHOUSE"),
+        }
+    return snowflake.connector.connect(
+        account=creds["account"],
+        user=creds["user"],
+        password=creds["password"],
+        warehouse=creds["warehouse"],
+        database="LOREAL_DB",
+    )
 
 @st.cache_data(ttl=3600)
 def q(sql: str) -> pd.DataFrame:
