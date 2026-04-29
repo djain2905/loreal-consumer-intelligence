@@ -208,3 +208,4 @@ __marimo__/
 
 # Project requirements
 project-requirements-README.md
+.streamlit/secrets.toml
