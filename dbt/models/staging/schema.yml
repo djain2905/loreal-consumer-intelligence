@@ -1,6 +1,36 @@
 version: 2
 
 models:
+  - name: stg_lancome_catalog
+    description: >
+      Cleaned rows from RAW.LANCOME_CATALOG — the Lancôme makeup catalog scraped
+      via Firecrawl and loaded to Snowflake. One row per line of scraped content,
+      filtered to non-empty lines.
+    config:
+      meta:
+        owner: dhwanijain2905@gmail.com
+        grain: one row per content line
+        source: Firecrawl scrape of lancome-usa.com/makeup
+    columns:
+      - name: line_number
+        description: Sequential line number from the original scraped markdown.
+        tests:
+          - not_null
+      - name: source_name
+        description: Identifier for the scraped source (e.g. lancome_makeup_catalog).
+        tests:
+          - not_null
+      - name: source_url
+        description: URL that was scraped.
+        tests:
+          - not_null
+      - name: content_text
+        description: The scraped markdown content for this line.
+        tests:
+          - not_null
+      - name: content_length
+        description: Character length of the content line.
+
   - name: stg_sephora_reviews
     description: >
       Cleaned review-level rows from RAW.SEPHORA_REVIEWS. One row per unique review
