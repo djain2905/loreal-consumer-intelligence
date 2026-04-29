@@ -1,0 +1,32 @@
+name: Extract Kaggle → Snowflake RAW
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"   # Every Monday at 6am UTC
+  workflow_dispatch:        # Manual trigger from GitHub Actions tab
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install kaggle pandas snowflake-connector-python python-dotenv
+
+      - name: Run extraction script
+        env:
+          KAGGLE_USERNAME:      ${{ secrets.KAGGLE_USERNAME }}
+          KAGGLE_KEY:           ${{ secrets.KAGGLE_KEY }}
+          SNOWFLAKE_ACCOUNT:    ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_USER:       ${{ secrets.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD:   ${{ secrets.SNOWFLAKE_PASSWORD }}
+          SNOWFLAKE_WAREHOUSE:  ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+        run: python scripts/extract_kaggle.py

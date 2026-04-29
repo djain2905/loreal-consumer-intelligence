@@ -1,0 +1,35 @@
+name: Extract Firecrawl → knowledge/raw
+
+on:
+  schedule:
+    - cron: "0 7 * * 1"   # Every Monday at 7am UTC (1hr after Kaggle job)
+  workflow_dispatch:        # Manual trigger from GitHub Actions tab
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install firecrawl-py python-dotenv
+
+      - name: Run extraction script
+        env:
+          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+        run: python scripts/extract_firecrawl.py
+
+      - name: Commit new raw files
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add knowledge/raw/
+          git diff --staged --quiet || git commit -m "chore: refresh scraped knowledge/raw sources [skip ci]"
+          git push
