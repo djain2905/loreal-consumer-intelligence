@@ -250,7 +250,7 @@ with tab2:
         showarrow=True, arrowhead=2, arrowcolor=ROSE, arrowwidth=1.8,
         ax=0, ay=-70,
         font=dict(size=10, color="#1A1A1A", family=FONT),
-        bgcolor="rgba(253,246,245,0.95)", bordercolor=ROSE,
+        bgcolor="rgba(253,246,245,0.5)", bordercolor=ROSE,
         borderwidth=1.5, borderpad=8, align="center",
     )
     fig_trend.add_annotation(
@@ -260,7 +260,7 @@ with tab2:
         showarrow=True, arrowhead=2, arrowcolor=GOLD, arrowwidth=1.8,
         ax=0, ay=70,
         font=dict(size=10, color="#1A1A1A", family=FONT),
-        bgcolor="rgba(253,246,245,0.95)", bordercolor=GOLD,
+        bgcolor="rgba(253,246,245,0.5)", bordercolor=GOLD,
         borderwidth=1.5, borderpad=8, align="center",
     )
     fig_trend.update_layout(
