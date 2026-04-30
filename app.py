@@ -246,7 +246,7 @@ with tab2:
     fig_trend.add_annotation(
         x="2018-06-01", y=4.48,
         xref="x", yref="y",
-        text="<b>Ratings hold above 4.0★ for 9+ consecutive years</b><br>A loyal, satisfied base — not a brand in decline",
+        text="<b>Ratings hold above 4.0★ for multiple years</b><br>A loyal, satisfied base — not a brand in decline",
         showarrow=True, arrowhead=2, arrowcolor=ROSE, arrowwidth=1.8,
         ax=0, ay=-70,
         font=dict(size=10, color="#1A1A1A", family=FONT),
