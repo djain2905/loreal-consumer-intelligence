@@ -227,6 +227,7 @@ with tab2:
     )
 
     df_time["REVIEW_MONTH"] = pd.to_datetime(df_time["REVIEW_MONTH"])
+    df_time = df_time[df_time["REVIEW_COUNT"] >= 10]
     fig_trend = make_subplots(specs=[[{"secondary_y": True}]])
     fig_trend.add_trace(
         go.Scatter(
@@ -261,6 +262,14 @@ with tab2:
                             range=[0, 100], showgrid=False,
                             tickfont=dict(family=FONT, size=11))
     st.plotly_chart(fig_trend, use_container_width=True)
+
+    st.caption(
+        "**Note:** Months with fewer than 10 reviews are excluded. "
+        "Early periods (pre-2013) had very low monthly review volume — sometimes 1–3 reviews — "
+        "causing extreme swings in both avg rating and desire rate that reflect sampling noise, "
+        "not real consumer sentiment. The 10-review threshold keeps only months where the "
+        "monthly average is statistically meaningful."
+    )
 
     st.markdown(
         "> **Takeaway:** When the unmet need rate rises while average rating holds steady, "
