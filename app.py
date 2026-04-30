@@ -511,6 +511,27 @@ CONCEPTS = {
     },
 }
 
+THEME_KEYWORDS = {
+    "Sensitive Skin Formula": ["sensitiv", "reaction", "irritat", "hypoallergenic", "fragrance-free", "broke out", "rash", "allerg", "reactive"],
+    "Texture & Formula":      ["texture", "formula", "heavy", "lightweight", "gel", "cream", "consistency", "absorb", "greasy", "oily"],
+    "Fragrance & Scent":      ["fragrance", "scent", "smell", "perfume", "odor", "fragrance-free"],
+    "Packaging & Format":     ["packag", "pump", "bottle", "dispenser", "travel", "format", "container", "applicator"],
+    "SPF & Sun Protection":   ["spf", "sunscreen", "sun protection", "uv", "sunburn"],
+    "Key Ingredients":        ["vitamin c", "retinol", "hyaluronic", "niacinamide", "peptide", "ingredient", "aha", "bha"],
+    "Price & Value":          ["price", "expensiv", "worth", "value", "cost", "afford", "cheaper"],
+    "Shade Range & Inclusivity": ["shade", "color match", "colour match", "foundation", "inclusiv", "dark", "light", "undertone", "match my"],
+    "Longevity & Wear":       ["last", "longevity", "stay", "transfer", "fade", "all day", "hours", "wear off"],
+}
+
+def best_quote(df: pd.DataFrame, theme: str) -> str:
+    keywords = THEME_KEYWORDS.get(theme, [])
+    if keywords:
+        pattern = "|".join(keywords)
+        relevant = df[df["REVIEW_TEXT"].str.lower().str.contains(pattern, na=False)]
+        if not relevant.empty:
+            df = relevant
+    return df.sort_values("RATING").iloc[0]["REVIEW_TEXT"] if not df.empty else ""
+
 with tab5:
     st.header("💡 Opportunity Brief")
     st.caption("A product launch brief built from 5,951 Lancôme reviews — synthesized for brand decision-making")
@@ -527,10 +548,7 @@ with tab5:
     # ── #1 Recommendation card ─────────────────────────────────────────────────
     top_concept = CONCEPTS[top_vol["DESIRE_CATEGORY"]]
     top_quote_df = df_desires[df_desires["DESIRE_CATEGORY"] == top_vol["DESIRE_CATEGORY"]]
-    top_quote = (
-        top_quote_df.sort_values("RATING").iloc[0]["REVIEW_TEXT"]
-        if not top_quote_df.empty else ""
-    )
+    top_quote = best_quote(top_quote_df, top_vol["DESIRE_CATEGORY"])
 
     st.markdown(f"""
 <div style="background:#FDF6F5;border-left:4px solid {ROSE};padding:1.5rem 2rem;border-radius:6px;margin-bottom:1rem;">
@@ -588,10 +606,7 @@ HIGHEST FRUSTRATION — LOWEST AVG RATING</p>
     concept = CONCEPTS.get(selected, {})
 
     quote_df = df_desires[df_desires["DESIRE_CATEGORY"] == selected]
-    quote = (
-        quote_df.sort_values("RATING").iloc[0]["REVIEW_TEXT"]
-        if not quote_df.empty else "No desire reviews found for this theme."
-    )
+    quote = best_quote(quote_df, selected) or "No desire reviews found for this theme."
 
     pct_of_all = round(int(row["DESIRE_COUNT"]) / int(kpi["TOTAL_REVIEWS"]) * 100, 1)
     c1, c2, c3 = st.columns(3)
