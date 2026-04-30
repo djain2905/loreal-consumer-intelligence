@@ -517,11 +517,11 @@ CONCEPTS = {
         "gap":             "No fragrance-free variant of Lancôme's #1 bestselling serum exists.",
     },
     "Key Ingredients": {
-        "product_name":    "Rénergie Vitamin C+",
-        "positioning":     "A Lancôme-grade Vitamin C brightening serum with microbiome support — clinical ingredient, Lancôme quality standard.",
-        "consumer":        "Ingredient-aware prestige shoppers who want Vitamin C but distrust generic formulas.",
-        "price_tier":      "$120 – $160",
-        "gap":             "No dedicated Vitamin C serum in the Lancôme lineup despite it being the most-demanded skincare ingredient.",
+        "product_name":    "Génifique Clarity",
+        "positioning":     "A simplified, climate-adaptive Lancôme serum with full ingredient transparency — no hidden high-glycerin fillers, formulated to perform across all environments and skin types.",
+        "consumer":        "Ingredient-literate prestige buyers who research formulations, read labels, and have been burned by hidden actives that behave differently across climates or skin conditions.",
+        "price_tier":      "$130 – $175",
+        "gap":             "Lancôme's current serums do not disclose ingredient rationale or flag climate/skin-type compatibility — consumers are discovering mismatches post-purchase and switching brands.",
     },
     "Packaging & Format": {
         "product_name":    "Absolue Refill System",
