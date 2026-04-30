@@ -258,7 +258,7 @@ with tab2:
         xref="x", yref="y2",
         text="<b>Desire signals persist even at peak satisfaction</b><br>These consumers aren't leaving — they're asking for more.<br>That's the whitespace opportunity.",
         showarrow=True, arrowhead=2, arrowcolor=GOLD, arrowwidth=1.8,
-        ax=0, ay=70,
+        ax=0, ay=-110,
         font=dict(size=10, color="#1A1A1A", family=FONT),
         bgcolor="rgba(253,246,245,0.5)", bordercolor=GOLD,
         borderwidth=1.5, borderpad=8, align="center",
