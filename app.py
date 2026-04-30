@@ -512,15 +512,15 @@ CONCEPTS = {
 }
 
 THEME_KEYWORDS = {
-    "Sensitive Skin Formula": ["sensitiv", "reaction", "irritat", "hypoallergenic", "fragrance-free", "broke out", "rash", "allerg", "reactive"],
-    "Texture & Formula":      ["texture", "formula", "heavy", "lightweight", "gel", "cream", "consistency", "absorb", "greasy", "oily"],
-    "Fragrance & Scent":      ["fragrance", "scent", "smell", "perfume", "odor", "fragrance-free"],
-    "Packaging & Format":     ["packag", "pump", "bottle", "dispenser", "travel", "format", "container", "applicator"],
+    "Sensitive Skin Formula": ["sensitiv", "reaction", "irritat", "hypoallergenic", "fragrance-free", "broke out", "breaking out", "rash", "allerg", "reactive skin"],
+    "Texture & Formula":      ["too heavy", "too thick", "too greasy", "texture", "consistency", "absorb", "greasy", "lightweight formula", "feels heavy", "pilling"],
+    "Fragrance & Scent":      ["fragrance", "scent", "smell", "perfume", "odor"],
+    "Packaging & Format":     ["packaging", "pump", "dispenser", "applicator design", "bottle design", "travel size", "hard to open", "messy"],
     "SPF & Sun Protection":   ["spf", "sunscreen", "sun protection", "uv", "sunburn"],
-    "Key Ingredients":        ["vitamin c", "retinol", "hyaluronic", "niacinamide", "peptide", "ingredient", "aha", "bha"],
-    "Price & Value":          ["price", "expensiv", "worth", "value", "cost", "afford", "cheaper"],
-    "Shade Range & Inclusivity": ["shade", "color match", "colour match", "foundation", "inclusiv", "dark", "light", "undertone", "match my"],
-    "Longevity & Wear":       ["last", "longevity", "stay", "transfer", "fade", "all day", "hours", "wear off"],
+    "Key Ingredients":        ["vitamin c", "retinol", "hyaluronic", "niacinamide", "peptide", "aha", "bha", "active ingredient"],
+    "Price & Value":          ["too expensive", "price", "worth the price", "value for", "cost", "afford", "cheaper alternative"],
+    "Shade Range & Inclusivity": ["shade range", "shade match", "my shade", "find a shade", "no shade", "more shades", "darker shade", "lighter shade", "inclusiv", "undertone", "colour range", "color range", "doesn't match my skin"],
+    "Longevity & Wear":       ["didn't last", "doesn't last", "wear off", "fades", "lasts all day", "all day wear", "transfer", "longevity", "wore off"],
 }
 
 def best_quote(df: pd.DataFrame, theme: str) -> str:
