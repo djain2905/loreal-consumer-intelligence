@@ -593,10 +593,11 @@ HIGHEST FRUSTRATION — LOWEST AVG RATING</p>
         if not quote_df.empty else "No desire reviews found for this theme."
     )
 
+    pct_of_all = round(int(row["DESIRE_COUNT"]) / int(kpi["TOTAL_REVIEWS"]) * 100, 1)
     c1, c2, c3 = st.columns(3)
-    c1.metric("Desire Reviews",   f"{int(row['DESIRE_COUNT']):,}")
-    c2.metric("Unique Reviewers", f"{int(row['UNIQUE_REVIEWERS']):,}")
-    c3.metric("Avg Rating",       f"{row['AVG_RATING']} ★")
+    c1.metric("Desire Reviews",          f"{int(row['DESIRE_COUNT']):,}")
+    c2.metric("% of All Lancôme Reviews", f"{pct_of_all}%")
+    c3.metric("Avg Rating",              f"{row['AVG_RATING']} ★")
 
     st.markdown(f"""
 <div style="background:#FAFAFA;border:1px solid #E5E5E5;padding:1.5rem 2rem;border-radius:6px;margin-top:1rem;">
