@@ -528,7 +528,7 @@ with tab5:
     top_concept = CONCEPTS[top_vol["DESIRE_CATEGORY"]]
     top_quote_df = df_desires[df_desires["DESIRE_CATEGORY"] == top_vol["DESIRE_CATEGORY"]]
     top_quote = (
-        top_quote_df.sort_values("RATING").iloc[0]["REVIEW_TEXT"][:280]
+        top_quote_df.sort_values("RATING").iloc[0]["REVIEW_TEXT"]
         if not top_quote_df.empty else ""
     )
 
@@ -556,7 +556,7 @@ with tab5:
 <td style="padding:0.3rem 0;"><strong>{int(top_vol['DESIRE_COUNT'])} desire reviews</strong> · {int(top_vol['UNIQUE_REVIEWERS'])} unique consumers · {top_vol['AVG_RATING']} ★ avg</td>
 </tr>
 </table>
-{"<p style='margin:1rem 0 0 0;font-size:0.85rem;color:#555;border-top:1px solid #EEE;padding-top:0.8rem;'><em>&ldquo;" + top_quote + "&hellip;&rdquo;</em></p>" if top_quote else ""}
+{"<p style='margin:1rem 0 0 0;font-size:0.85rem;color:#555;border-top:1px solid #EEE;padding-top:0.8rem;'><em>&ldquo;" + top_quote + "&rdquo;</em></p>" if top_quote else ""}
 </div>
 """, unsafe_allow_html=True)
 
@@ -589,7 +589,7 @@ HIGHEST FRUSTRATION — LOWEST AVG RATING</p>
 
     quote_df = df_desires[df_desires["DESIRE_CATEGORY"] == selected]
     quote = (
-        quote_df.sort_values("RATING").iloc[0]["REVIEW_TEXT"][:280]
+        quote_df.sort_values("RATING").iloc[0]["REVIEW_TEXT"]
         if not quote_df.empty else "No desire reviews found for this theme."
     )
 
@@ -620,7 +620,7 @@ HIGHEST FRUSTRATION — LOWEST AVG RATING</p>
 </table>
 <p style="margin:1rem 0 0 0;font-size:0.85rem;color:#555;border-top:1px solid #EEE;padding-top:0.8rem;">
 <strong>What a consumer said:</strong><br>
-<em>&ldquo;{quote}&hellip;&rdquo;</em>
+<em>&ldquo;{quote}&rdquo;</em>
 </p>
 </div>
 """, unsafe_allow_html=True)
