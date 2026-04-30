@@ -562,13 +562,19 @@ def best_quote(df: pd.DataFrame, theme: str) -> str:
     keywords = THEME_KEYWORDS.get(theme, [])
     if not keywords:
         return df.sort_values("RATING").iloc[0]["REVIEW_TEXT"] if not df.empty else ""
-    text_lower = df["REVIEW_TEXT"].str.lower()
-    df = df.copy()
-    df["_score"] = sum(text_lower.str.contains(kw, na=False).astype(int) for kw in keywords)
-    relevant = df[df["_score"] > 0]
-    if relevant.empty:
-        return ""
-    return relevant.sort_values(["_score", "RATING"], ascending=[False, True]).iloc[0]["REVIEW_TEXT"]
+
+    # Only look at negative reviews first; widen threshold only if needed
+    for max_rating in (2, 3, 4):
+        pool = df[df["RATING"] <= max_rating].copy()
+        if pool.empty:
+            continue
+        text_lower = pool["REVIEW_TEXT"].str.lower()
+        pool["_score"] = sum(text_lower.str.contains(kw, na=False).astype(int) for kw in keywords)
+        relevant = pool[pool["_score"] > 0]
+        if not relevant.empty:
+            return relevant.sort_values(["_score", "RATING"], ascending=[False, True]).iloc[0]["REVIEW_TEXT"]
+
+    return ""  # no negative, on-topic review found
 
 with tab5:
     st.header("💡 Opportunity Brief")
