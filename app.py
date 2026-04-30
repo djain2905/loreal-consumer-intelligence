@@ -72,13 +72,27 @@ def get_conn():
         password=password,
         warehouse=warehouse,
         database="LOREAL_DB",
+        client_session_keep_alive=True,
+        login_timeout=60,
+        network_timeout=60,
     )
 
 @st.cache_data(ttl=3600)
 def q(sql: str) -> pd.DataFrame:
-    cur = get_conn().cursor()
-    cur.execute(sql)
-    return cur.fetch_pandas_all()
+    import time
+    for attempt in range(3):
+        try:
+            conn = get_conn()
+            cur  = conn.cursor()
+            # Resume warehouse explicitly before querying
+            cur.execute(f"ALTER WAREHOUSE COMPUTE_WH RESUME IF SUSPENDED")
+            cur.execute(sql)
+            return cur.fetch_pandas_all()
+        except Exception as e:
+            if attempt < 2:
+                time.sleep(5)
+            else:
+                raise e
 
 # ── Data ───────────────────────────────────────────────────────────────────────
 df_kpis = q("""
