@@ -1,3 +1,21 @@
+"""
+Extract Sephora product and review data from Kaggle and load into Snowflake RAW.
+
+Sources:
+  - nadyinky/sephora-products-and-skincare-reviews (product_info.csv, reviews_0-250.csv)
+
+Writes to:
+  - LOREAL_DB.RAW.SEPHORA_PRODUCTS  (one row per product)
+  - LOREAL_DB.RAW.SEPHORA_REVIEWS   (one row per review, batched 10K rows)
+
+Required env vars:
+  KAGGLE_USERNAME, KAGGLE_KEY
+  SNOWFLAKE_ACCOUNT, SNOWFLAKE_USER, SNOWFLAKE_PASSWORD,
+  SNOWFLAKE_DATABASE, SNOWFLAKE_WAREHOUSE, SNOWFLAKE_SCHEMA
+
+Run: python3 scripts/extract_kaggle.py
+Orchestrated via: .github/workflows/extract_kaggle.yml (weekly, Monday 6am UTC)
+"""
 import os
 import pandas as pd
 import snowflake.connector

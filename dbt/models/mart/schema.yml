@@ -20,6 +20,9 @@ models:
         description: Foreign key to dim_products.
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_products')
+              field: product_id
       - name: author_id
         description: Sephora reviewer identifier.
         tests:
@@ -86,9 +89,12 @@ models:
         tests:
           - not_null
       - name: brand
-        description: Brand name as it appears on Sephora (alias of brand_name from staging).
+        description: Brand name as it appears on Sephora (alias of brand_name from staging). Foreign key to dim_brands.brand_name.
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_brands')
+              field: brand_name
       - name: price_usd
         description: Product price in USD.
       - name: price_tier

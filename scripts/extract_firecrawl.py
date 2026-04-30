@@ -1,3 +1,20 @@
+"""
+Scrape brand and market knowledge sources using the Firecrawl API and write
+each page as a dated markdown file into knowledge/raw/.
+
+Sources (19 URLs across 5 sites):
+  lancome-usa.com, loreal.com, wwd.com, sephora.com, wikipedia.org
+
+Output:
+  knowledge/raw/<source-slug>-<YYYY-MM-DD>.md  (one file per URL per run)
+
+Required env vars:
+  FIRECRAWL_API_KEY
+
+Run: python3 scripts/extract_firecrawl.py
+Orchestrated via: .github/workflows/extract_firecrawl.yml (weekly, Monday 7am UTC)
+Files are auto-committed to the repo after each successful run.
+"""
 import os
 from datetime import date
 from pathlib import Path
