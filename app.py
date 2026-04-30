@@ -529,7 +529,8 @@ def best_quote(df: pd.DataFrame, theme: str) -> str:
         pattern = "|".join(keywords)
         relevant = df[df["REVIEW_TEXT"].str.lower().str.contains(pattern, na=False)]
         if not relevant.empty:
-            df = relevant
+            return relevant.sort_values("RATING").iloc[0]["REVIEW_TEXT"]
+        return ""  # no relevant quote found — don't surface an off-topic one
     return df.sort_values("RATING").iloc[0]["REVIEW_TEXT"] if not df.empty else ""
 
 with tab5:
@@ -606,7 +607,7 @@ HIGHEST FRUSTRATION — LOWEST AVG RATING</p>
     concept = CONCEPTS.get(selected, {})
 
     quote_df = df_desires[df_desires["DESIRE_CATEGORY"] == selected]
-    quote = best_quote(quote_df, selected) or "No desire reviews found for this theme."
+    quote = best_quote(quote_df, selected)
 
     pct_of_all = round(int(row["DESIRE_COUNT"]) / int(kpi["TOTAL_REVIEWS"]) * 100, 1)
     c1, c2, c3 = st.columns(3)
@@ -633,9 +634,6 @@ HIGHEST FRUSTRATION — LOWEST AVG RATING</p>
 <td>{concept.get('gap', '—')}</td>
 </tr>
 </table>
-<p style="margin:1rem 0 0 0;font-size:0.85rem;color:#555;border-top:1px solid #EEE;padding-top:0.8rem;">
-<strong>What a consumer said:</strong><br>
-<em>&ldquo;{quote}&rdquo;</em>
-</p>
+{"<p style='margin:1rem 0 0 0;font-size:0.85rem;color:#555;border-top:1px solid #EEE;padding-top:0.8rem;'><strong>What a consumer said:</strong><br><em>&ldquo;" + quote + "&rdquo;</em></p>" if quote else ""}
 </div>
 """, unsafe_allow_html=True)
