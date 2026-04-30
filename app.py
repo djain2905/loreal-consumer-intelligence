@@ -477,6 +477,13 @@ HARDCODED_QUOTES = {
         "results in a wastefully large amount of product coming out all at once. I wish there "
         "was a pump dispenser or a smaller hole at the top of the bottle."
     ),
+    "Price & Value": (
+        "This product is soooo expensive but it lasts a long time and does make my skin look "
+        "radiant. As I am entering my 30s, I thought it would be a good product to try and it "
+        "never disappoints. It's very hydrating and takes less than a minute to penetrate into "
+        "the skin. Wish it was a little more affordable because there are other serums in the "
+        "market at a lower cost that have similar ingredients and effects."
+    ),
     "SPF & Sun Protection": (
         "I received this product for free through Influenster. Since I've gotten it, I've "
         "enjoyed it. Since it's winter my skin tends to be a slight bit more dry, so the "
