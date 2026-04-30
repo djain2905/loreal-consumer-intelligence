@@ -29,13 +29,20 @@ Web Scrape (Lancôme.com, L'Oréal press releases, beauty editorial)
 |--------|------|--------|
 | Kaggle: Sephora Products and Skincare Reviews (`product_info.csv`) | Kaggle API | `raw.sephora_products` |
 | Kaggle: Sephora Products and Skincare Reviews (`reviews_0-250.csv`) | Kaggle API | `raw.sephora_reviews` |
-| Lancôme.com, L'Oréal press releases, beauty editorial, Reddit | Web scrape | `knowledge/raw/` |
+| lancome-usa.com, loreal.com, wwd.com, sephora.com, wikipedia.org | Web scrape (Firecrawl) | `knowledge/raw/` (19 sources) |
 
 ## Star Schema
 
-- **`fct_reviews`** — review-level grain: `review_id`, `product_id`, `author_id`, `rating`, `review_date`, `is_recommended`, `helpfulness`, `desire_flag`, `desire_text`
-- **`dim_products`** — `product_id`, `product_name`, `brand`, `primary_category`, `secondary_category`, `price_tier`
+- **`fct_reviews`** — review-level grain: `review_id`, `product_id`, `author_id`, `rating`, `review_date`, `is_recommended`, `is_lancome`, `sentiment_bucket`, `complaint_flag`, `desire_flag`, `desire_category`, `desire_text`
+- **`dim_products`** — `product_id`, `product_name`, `brand`, `primary_category`, `secondary_category`, `price_usd`, `price_tier`, `division`
 - **`dim_brands`** — `brand_id`, `brand_name`, `division` (Luxe / Consumer Products / Dermatological / Professional)
+
+## Mart Tables
+
+- **`mart_whitespace_summary`** — desire theme aggregates for Lancôme: `desire_category`, `desire_count`, `avg_rating`, `unique_reviewers`, `opportunity_score`
+- **`mart_sentiment_over_time`** — monthly trend: `review_month`, `review_count`, `avg_rating`, `desire_rate`, `positive_rate`, `negative_rate`
+- **`mart_competitor_benchmarks`** — brand-level: `brand_name`, `division`, `review_count`, `avg_rating`, `desire_rate`, `complaint_rate`, `is_lancome`
+- **`mart_product_performance`** — product-level: `product_name`, `brand`, `review_count`, `avg_rating`, `desire_rate`, `complaint_rate`
 
 ## Tech Stack
 
@@ -54,10 +61,11 @@ All secrets stored as environment variables. Never committed to the repo.
 Required env vars:
 - `KAGGLE_USERNAME`, `KAGGLE_KEY` — Kaggle API credentials
 - `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, `SNOWFLAKE_PASSWORD`, `SNOWFLAKE_DATABASE`, `SNOWFLAKE_WAREHOUSE`, `SNOWFLAKE_SCHEMA` — Snowflake connection
+- `FIRECRAWL_API_KEY` — Firecrawl web scraping API
 
 ## Knowledge Base
 
-Raw sources are stored in `knowledge/raw/` (15+ sources from 3+ sites). Claude Code-generated wiki pages are in `knowledge/wiki/`.
+Raw sources are stored in `knowledge/raw/` (19 sources from 5 sites: lancome-usa.com, loreal.com, wwd.com, sephora.com, wikipedia.org). Claude Code-generated wiki pages are in `knowledge/wiki/`.
 
 ### How to Query the Knowledge Base
 
