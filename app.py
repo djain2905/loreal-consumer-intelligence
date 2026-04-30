@@ -243,6 +243,26 @@ with tab2:
         ),
         secondary_y=True,
     )
+    fig_trend.add_annotation(
+        x="2018-06-01", y=4.48,
+        xref="x", yref="y",
+        text="<b>Ratings hold above 4.0★ for 9+ consecutive years</b><br>A loyal, satisfied base — not a brand in decline",
+        showarrow=True, arrowhead=2, arrowcolor=ROSE, arrowwidth=1.8,
+        ax=0, ay=-70,
+        font=dict(size=10, color="#1A1A1A", family=FONT),
+        bgcolor="rgba(253,246,245,0.95)", bordercolor=ROSE,
+        borderwidth=1.5, borderpad=8, align="center",
+    )
+    fig_trend.add_annotation(
+        x="2021-01-01", y=28,
+        xref="x", yref="y2",
+        text="<b>Desire signals persist even at peak satisfaction</b><br>These consumers aren't leaving — they're asking for more.<br>That's the whitespace opportunity.",
+        showarrow=True, arrowhead=2, arrowcolor=GOLD, arrowwidth=1.8,
+        ax=0, ay=70,
+        font=dict(size=10, color="#1A1A1A", family=FONT),
+        bgcolor="rgba(253,246,245,0.95)", bordercolor=GOLD,
+        borderwidth=1.5, borderpad=8, align="center",
+    )
     fig_trend.update_layout(
         title="Lancôme — Avg Rating vs. Unmet Need Rate Over Time",
         hovermode="x unified",
