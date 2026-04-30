@@ -9,7 +9,38 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import matplotlib.patheffects as pe
+import matplotlib.dates as mdates
 import numpy as np
+import pandas as pd
+from dotenv import load_dotenv
+load_dotenv()
+import snowflake.connector
+
+def _fetch_trends():
+    try:
+        conn = snowflake.connector.connect(
+            account=os.getenv("SNOWFLAKE_ACCOUNT"),
+            user=os.getenv("SNOWFLAKE_USER"),
+            password=os.getenv("SNOWFLAKE_PASSWORD"),
+            warehouse=os.getenv("SNOWFLAKE_WAREHOUSE"),
+            database="LOREAL_DB",
+        )
+        cur = conn.cursor()
+        cur.execute("ALTER WAREHOUSE COMPUTE_WH RESUME IF SUSPENDED")
+        cur.execute("""
+            select review_month, avg_rating, desire_rate, review_count
+            from loreal_db.dev_mart.mart_sentiment_over_time
+            where review_count >= 10
+            order by review_month
+        """)
+        rows = cur.fetchall()
+        conn.close()
+        return pd.DataFrame(rows, columns=["month", "avg_rating", "desire_rate", "review_count"])
+    except Exception as e:
+        print(f"  ⚠️  Snowflake unavailable ({e}) — skipping trends slide")
+        return None
+
+df_trends = _fetch_trends()
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
@@ -91,8 +122,11 @@ def fig2buf(fig):
     plt.close(fig)
     return buf
 
+ACCENT_BG = {GOLD: RGBColor(0xFF, 0xFD, 0xF0), ROSE: LROSE}
+
 def callout(slide, text, l, t, w, h, accent=RED):
-    box(slide, l, t, w, h, LRED)
+    bg_color = ACCENT_BG.get(accent, LRED)
+    box(slide, l, t, w, h, bg_color)
     box(slide, l, t, Inches(0.06), h, accent)
     tb(slide, "▶  " + text, l + Inches(0.12), t + Inches(0.1),
        w - Inches(0.2), h - Inches(0.15),
@@ -155,7 +189,70 @@ for i, (val, lbl) in enumerate([
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SLIDE 2  Descriptive  — takeaway with numbers
+# SLIDE 2  Setting the Scene — trends over time
+# ══════════════════════════════════════════════════════════════════════════════
+if df_trends is not None:
+    s = prs.slides.add_slide(blank)
+    bg(s, CREAM)
+    box(s, Inches(0), Inches(0), Inches(0.5), H, ROSE)
+
+    tb(s, "SETTING THE SCENE  ·  How Have Consumers Felt About Lancôme Over Time?",
+       Inches(0.75), Inches(0.22), Inches(12), Inches(0.35),
+       sz=10, bold=True, color=ROSE, font="Calibri")
+    tb(s, "4.0★+ for Nearly a Decade — A Loyal Base That Still Has More to Ask For",
+       Inches(0.75), Inches(0.6), Inches(9.0), Inches(0.85),
+       sz=26, bold=True, color=DARK, font="Georgia")
+    divider(s, Inches(0.75), Inches(1.52), Inches(8.8))
+
+    dates   = pd.to_datetime(df_trends["month"])
+    ratings = df_trends["avg_rating"].values
+    desires = df_trends["desire_rate"].values
+
+    fig, ax1 = plt.subplots(figsize=(8.8, 4.8), facecolor=CR)
+    ax1.set_facecolor(CR)
+    ax2 = ax1.twinx()
+
+    ax1.plot(dates, ratings, color=R,  linewidth=2.2, label="Avg Rating (★)")
+    ax2.plot(dates, desires, color=G,  linewidth=1.8, linestyle="--",
+             label="Unmet Need Rate (%)", alpha=0.9)
+
+    ax1.set_ylabel("Avg Rating (★)", color=R, fontsize=10)
+    ax2.set_ylabel("Unmet Need Rate (%)", color=G, fontsize=10)
+    ax1.set_ylim(1, 5.6)
+    ax2.set_ylim(0, 90)
+    ax1.tick_params(axis="y", labelcolor=R, labelsize=9)
+    ax2.tick_params(axis="y", labelcolor=G, labelsize=9)
+    ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
+    ax1.xaxis.set_major_locator(mdates.YearLocator())
+    ax1.tick_params(axis="x", labelsize=9)
+    ax1.spines[["top"]].set_visible(False)
+    ax2.spines[["top"]].set_visible(False)
+    ax1.grid(axis="x", color="#EEEEEE", linestyle="--", linewidth=0.6)
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2, labels1 + labels2, fontsize=9, framealpha=0,
+               loc="lower right")
+    fig.tight_layout(pad=0.6)
+    s.shapes.add_picture(fig2buf(fig), Inches(0.6), Inches(1.65), Inches(9.2), Inches(5.35))
+
+    # Right-side callout boxes
+    callout(s,
+            "Ratings hold above 4.0★ for 9+ consecutive years — "
+            "a loyal, retained consumer base. Not a brand in decline.",
+            Inches(10.0), Inches(1.85), Inches(3.1), Inches(1.5), accent=ROSE)
+    callout(s,
+            "Desire signals persist even at peak satisfaction — "
+            "these consumers aren't leaving. They're asking for more. "
+            "That's the whitespace opportunity.",
+            Inches(10.0), Inches(3.55), Inches(3.1), Inches(1.8), accent=GOLD)
+
+    tb(s, "Source: mart_sentiment_over_time · Months with 10+ reviews only · LOREAL_DB.DEV_MART",
+       Inches(0.75), Inches(7.17), Inches(12), Inches(0.25),
+       sz=8, color=MID, font="Calibri")
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SLIDE 3  Descriptive  — takeaway with numbers
 # ══════════════════════════════════════════════════════════════════════════════
 s = prs.slides.add_slide(blank)
 bg(s, CREAM)
@@ -476,55 +573,6 @@ tb(s, "Projection assumes: 1.5% Sephora review rate (beauty industry standard) �
    sz=8, color=MID, font="Calibri", italic=True)
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-# SLIDE 6  Appendix
-# ══════════════════════════════════════════════════════════════════════════════
-s = prs.slides.add_slide(blank)
-bg(s, CREAM)
-box(s, Inches(0), Inches(0), Inches(0.5), H, ROSE)
-
-tb(s, "Appendix  ·  Methodology & Data Sources",
-   Inches(0.75), Inches(0.35), Inches(12), Inches(0.55),
-   sz=20, bold=True, color=DARK, font="Georgia")
-divider(s, Inches(0.75), Inches(1.0), Inches(11.8))
-
-cols = [
-    ("Data Sources", [
-        "Kaggle: Sephora Products & Skincare Reviews",
-        "601,847 total reviews · 5,951 Lancôme-specific",
-        "16 scraped sources: lancome-usa.com, loreal.com,",
-        "  Sephora, WWD, Wikipedia (via Firecrawl API)",
-    ]),
-    ("Pipeline", [
-        "Extract → Snowflake RAW (GitHub Actions, weekly)",
-        "Transform → dbt (10 models, 54 passing tests)",
-        "Desire detection: regex on review_text field",
-        "Dashboard: Streamlit Community Cloud",
-        "Knowledge base: Claude Code + 3 wiki pages",
-    ]),
-    ("Definitions", [
-        "Desire review: wish / want / need / hope /",
-        "  would love / lacks / missing",
-        "9 desire categories classified by regex pattern",
-        "Complaint flag: ≤2★ or negative keywords",
-        "Competitor set: top 5 brands by review volume",
-    ]),
-]
-
-for i, (title, items) in enumerate(cols):
-    x = Inches(0.75 + i * 4.15)
-    tb(s, title, x, Inches(1.2), Inches(3.9), Inches(0.4),
-       sz=12, bold=True, color=ROSE, font="Georgia")
-    for j, item in enumerate(items):
-        tb(s, f"• {item}", x, Inches(1.68 + j*0.44), Inches(3.9), Inches(0.4),
-           sz=10, color=DARK, font="Calibri")
-
-tb(s, "Live dashboard: https://loreal-consumer-intelligence-mjrfcmmqcagdkqlaclpuvu.streamlit.app",
-   Inches(0.75), Inches(5.8), Inches(12), Inches(0.38),
-   sz=11, color=BLUE, bold=True, font="Calibri")
-tb(s, "Repo: github.com/djain2905/loreal-consumer-intelligence",
-   Inches(0.75), Inches(6.22), Inches(12), Inches(0.38),
-   sz=11, color=BLUE, font="Calibri")
 
 # ── Save ───────────────────────────────────────────────────────────────────────
 prs.save(OUT)
