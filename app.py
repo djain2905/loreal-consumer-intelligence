@@ -445,6 +445,48 @@ with tab4:
 # ══════════════════════════════════════════════════════════════════════════════
 
 # Pre-written product concepts per whitespace theme
+HARDCODED_QUOTES = {
+    "Key Ingredients": (
+        "I wish I had paid attention to the ingredients prior to purchasing this serum. "
+        "I have over 55 skin which is normal leaning a bit towards oily on hot, humid days. "
+        "Everything was fine until I went on a trip to the desert. My skin became very dry. "
+        "So, I added additional moisturizers and serum but it only worsened. It turns out that "
+        "the high amount of glycerin was the culprit. Glycerin draws/attracts moisture. When "
+        "there's low or no moisture in the environment it draws it from your skin. Never in my "
+        "life have I had leathery skin. I mentioned my skin issues to a couple of people on our "
+        "group trip and was advised to watch out for skin care with glycerin. I tried another "
+        "member's serum and within a day my skin returned to normal."
+    ),
+    "Texture & Formula": (
+        "I have been using this product for about a month now and it's alright. The pros are "
+        "that it is dewy, lightweight and doesn't make me oily. The cons tho are that it is "
+        "not all that hydrating on my dry/combo skin, SUPER scented, leaves my skin almost "
+        "tacky/sticky and when I apply foundation over the top the shine that it provides my "
+        "skin can no longer be seen (and I like to wear light coverage foundations). Overall "
+        "it was not a good fit for me. I also find I have to use quite a few pumps to get the "
+        "amount of product I want out to feel hydrated."
+    ),
+    "Packaging & Format": (
+        "The toner itself is so-so. It does make my face feel soft, which is nice, but it "
+        "doesn't do much more than that. The reason for me writing this review is the packaging. "
+        "The product is slightly thicker than a typical liquid toner, which is fine. However, "
+        "when you try to dispense this onto a cotton round I have found it incredibly difficult "
+        "to get an amount that is anything but excessive. With any other liquid toner I would "
+        "tilt the bottle upside down and let it saturate the cotton round. Since this product "
+        "is a little thicker, that does not work. You must pour it onto a round which then "
+        "results in a wastefully large amount of product coming out all at once. I wish there "
+        "was a pump dispenser or a smaller hole at the top of the bottle."
+    ),
+    "SPF & Sun Protection": (
+        "I received this product for free through Influenster. Since I've gotten it, I've "
+        "enjoyed it. Since it's winter my skin tends to be a slight bit more dry, so the "
+        "hydration of this product does make a difference. But I don't know if it's just my "
+        "skin, I feel like the product doesn't make my skin as smooth as it states. I also "
+        "don't like that it doesn't have sunscreen. So I would have to add a small layer of "
+        "sunscreen. Other than that the bottle is beautiful and smells great."
+    ),
+}
+
 CONCEPTS = {
     "Sensitive Skin Formula": {
         "product_name":    "Génifique Sensitive",
@@ -559,6 +601,8 @@ THEME_KEYWORDS = {
 }
 
 def best_quote(df: pd.DataFrame, theme: str) -> str:
+    if theme in HARDCODED_QUOTES:
+        return HARDCODED_QUOTES[theme]
     keywords = THEME_KEYWORDS.get(theme, [])
     if not keywords:
         return df.sort_values("RATING").iloc[0]["REVIEW_TEXT"] if not df.empty else ""
