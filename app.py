@@ -519,7 +519,7 @@ THEME_KEYWORDS = {
     "SPF & Sun Protection":   ["spf", "sunscreen", "sun protection", "uv", "sunburn"],
     "Key Ingredients":        ["vitamin c", "retinol", "hyaluronic", "niacinamide", "peptide", "aha", "bha", "active ingredient"],
     "Price & Value":          ["too expensive", "price", "worth the price", "value for", "cost", "afford", "cheaper alternative"],
-    "Shade Range & Inclusivity": ["shade range", "shade match", "my shade", "find a shade", "no shade", "more shades", "darker shade", "lighter shade", "inclusiv", "undertone", "colour range", "color range", "doesn't match my skin"],
+    "Shade Range & Inclusivity": ["shade", "undertone", "skin tone", "complexion", "pale", "yellow on", "orange on", "runs pale", "runs yellow", "runs orange", "too dark for", "too light for", "too pink", "too ashy", "oxidize", "oxidise", "colour range", "color range", "inclusiv", "match my skin", "match my complexion", "deeper shade", "lighter shade"],
     "Longevity & Wear":       ["didn't last", "doesn't last", "wear off", "fades", "lasts all day", "all day wear", "transfer", "longevity", "wore off"],
 }
 
