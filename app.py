@@ -11,7 +11,7 @@ load_dotenv()
 
 st.set_page_config(
     page_title="Lancôme Consumer Intelligence",
-    page_icon="🌹",
+    page_icon="💄",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -51,12 +51,12 @@ def style(fig, height: int = 420):
 # ── Connection ─────────────────────────────────────────────────────────────────
 @st.cache_resource
 def get_conn():
-    if "snowflake" in st.secrets:
+    try:
         account   = st.secrets["snowflake"]["account"]
         user      = st.secrets["snowflake"]["user"]
         password  = st.secrets["snowflake"]["password"]
         warehouse = st.secrets["snowflake"]["warehouse"]
-    else:
+    except Exception:
         account   = os.getenv("SNOWFLAKE_ACCOUNT")
         user      = os.getenv("SNOWFLAKE_USER")
         password  = os.getenv("SNOWFLAKE_PASSWORD")
@@ -125,7 +125,7 @@ df_competitors = q("""
 """)
 
 # ── Header ─────────────────────────────────────────────────────────────────────
-st.title("🌹 Lancôme Consumer Intelligence")
+st.title("Lancôme Consumer Intelligence")
 st.caption("Identifying product whitespace from 600K+ verified Sephora reviews — built for L'Oréal USA")
 st.divider()
 
@@ -281,7 +281,6 @@ with tab3:
             "DESIRE_COUNT": True,
             "AVG_RATING": True,
             "UNIQUE_REVIEWERS": True,
-            "OPPORTUNITY_SCORE": True,
             "DESIRE_CATEGORY": False,
         },
         title="Consumer Desire Gap Map — Lancôme Reviews",
@@ -289,7 +288,6 @@ with tab3:
             "AVG_RATING":      "Average Rating (lower = more frustration)",
             "DESIRE_COUNT":    "Number of Desire Reviews (higher = stronger signal)",
             "UNIQUE_REVIEWERS":"Unique Reviewers",
-            "OPPORTUNITY_SCORE": "Opportunity Score",
         },
         size_max=80,
     )
@@ -304,12 +302,12 @@ with tab3:
     st.plotly_chart(style(fig_gap, height=560), use_container_width=True)
 
     top_vol = df_whitespace.iloc[0]
-    top_opp = df_whitespace.sort_values("OPPORTUNITY_SCORE", ascending=False).iloc[0]
+    top_frustration = df_whitespace.sort_values("AVG_RATING").iloc[0]
     m1, m2 = st.columns(2)
     m1.metric("Highest Volume Theme",      top_vol["DESIRE_CATEGORY"],
               f"{int(top_vol['DESIRE_COUNT'])} reviews")
-    m2.metric("Highest Opportunity Theme", top_opp["DESIRE_CATEGORY"],
-              f"Score {top_opp['OPPORTUNITY_SCORE']:.4f}")
+    m2.metric("Most Frustrated Theme",     top_frustration["DESIRE_CATEGORY"],
+              f"{top_frustration['AVG_RATING']} ★ avg rating")
 
     st.divider()
 
@@ -356,42 +354,43 @@ with tab4:
         "Lancôme is highlighted in rose."
     )
 
-    col1, col2 = st.columns(2)
-
-    with col1:
-        fig_avg = px.bar(
-            df_comp.sort_values("AVG_RATING", ascending=True),
-            x="AVG_RATING", y="BRAND_NAME", orientation="h",
-            color="IS_LANCOME",
-            color_discrete_map={True: ROSE, False: GRAY},
-            title="Average Star Rating by Brand",
-            labels={"AVG_RATING": "Avg Rating (★)", "BRAND_NAME": ""},
-            text="AVG_RATING",
-        )
-        fig_avg.update_traces(texttemplate="%{text:.2f} ★", textposition="outside",
-                              marker_line_width=0)
-        fig_avg.update_layout(showlegend=False, xaxis_range=[0, 5.5])
-        st.plotly_chart(style(fig_avg), use_container_width=True)
-
-    with col2:
-        fig_desire = px.bar(
-            df_comp.sort_values("DESIRE_RATE", ascending=True),
-            x="DESIRE_RATE", y="BRAND_NAME", orientation="h",
-            color="IS_LANCOME",
-            color_discrete_map={True: ROSE, False: GRAY},
-            title="Unmet Need Rate (%) by Brand",
-            labels={"DESIRE_RATE": "% Reviews Signaling an Unmet Need", "BRAND_NAME": ""},
-            text="DESIRE_RATE",
-        )
-        fig_desire.update_traces(texttemplate="%{text:.1f}%", textposition="outside",
-                                 marker_line_width=0)
-        fig_desire.update_layout(showlegend=False)
-        st.plotly_chart(style(fig_desire), use_container_width=True)
-
+    df_grouped = df_comp.sort_values("AVG_RATING", ascending=True).copy()
+    fig_grouped = go.Figure()
+    fig_grouped.add_trace(go.Bar(
+        y=df_grouped["BRAND_NAME"],
+        x=df_grouped["AVG_RATING"],
+        name="Avg Rating (★)",
+        orientation="h",
+        marker_color=[ROSE if v else GRAY for v in df_grouped["IS_LANCOME"]],
+        text=df_grouped["AVG_RATING"].apply(lambda v: f"{v:.2f} ★"),
+        textposition="outside",
+        marker_line_width=0,
+        offsetgroup=0,
+    ))
+    fig_grouped.add_trace(go.Bar(
+        y=df_grouped["BRAND_NAME"],
+        x=df_grouped["DESIRE_RATE"],
+        name="Unmet Need Rate (%)",
+        orientation="h",
+        marker_color=[ROSE if v else "#E8E8E8" for v in df_grouped["IS_LANCOME"]],
+        opacity=0.55,
+        text=df_grouped["DESIRE_RATE"].apply(lambda v: f"{v:.1f}%"),
+        textposition="outside",
+        marker_line_width=0,
+        offsetgroup=1,
+    ))
+    fig_grouped.update_layout(
+        barmode="group",
+        title="Avg Rating & Unmet Need Rate by Brand",
+        legend=dict(orientation="h", y=1.08),
+        xaxis_title="",
+        yaxis_title="",
+    )
+    st.plotly_chart(style(fig_grouped), use_container_width=True)
     st.caption(
-        "**Unmet Need Rate** = % of a brand's reviews containing desire language "
-        "(wish, want, need, would love, etc.). Higher = consumers are more actively "
-        "signaling gaps in that brand's lineup."
+        "**Unmet Need Rate** = % of reviews containing desire language (wish, want, need, etc.). "
+        "Higher = more consumers signaling gaps in that brand's lineup. "
+        "Lancôme is highlighted in rose."
     )
 
     st.divider()
@@ -430,115 +429,183 @@ with tab4:
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 5 — OPPORTUNITY BRIEF
 # ══════════════════════════════════════════════════════════════════════════════
+
+# Pre-written product concepts per whitespace theme
+CONCEPTS = {
+    "Sensitive Skin Formula": {
+        "product_name":    "Génifique Sensitive",
+        "positioning":     "The first Lancôme serum formulated fragrance-free and dermatologist-tested for reactive skin — microbiome science, zero compromise.",
+        "consumer":        "Prestige skincare buyers with sensitive or reactive skin who want clinical efficacy without irritation.",
+        "price_tier":      "$95 – $140",
+        "gap":             "Lancôme has no fragrance-free or hypoallergenic product at any price tier. No prestige competitor owns this position.",
+    },
+    "Texture & Formula": {
+        "product_name":    "Rénergie Featherlight",
+        "positioning":     "Rénergie's full peptide complex in an ultra-lightweight water-gel — anti-aging results without the weight.",
+        "consumer":        "Oily and combination skin consumers in warm climates who reject heavy creams but want premium anti-aging.",
+        "price_tier":      "$85 – $120",
+        "gap":             "The Rénergie franchise is cream-heavy with no lightweight or gel alternative in the lineup.",
+    },
+    "Fragrance & Scent": {
+        "product_name":    "Génifique Pure",
+        "positioning":     "The iconic Génifique serum, reformulated fragrance-free — same microbiome science, built for fragrance-sensitive skin.",
+        "consumer":        "Existing Génifique loyalists bothered by the scent, plus new consumers who exclude fragrance from their routines.",
+        "price_tier":      "$180 – $220",
+        "gap":             "No fragrance-free variant of Lancôme's #1 bestselling serum exists.",
+    },
+    "Key Ingredients": {
+        "product_name":    "Rénergie Vitamin C+",
+        "positioning":     "A Lancôme-grade Vitamin C brightening serum with microbiome support — clinical ingredient, Lancôme quality standard.",
+        "consumer":        "Ingredient-aware prestige shoppers who want Vitamin C but distrust generic formulas.",
+        "price_tier":      "$120 – $160",
+        "gap":             "No dedicated Vitamin C serum in the Lancôme lineup despite it being the most-demanded skincare ingredient.",
+    },
+    "Packaging & Format": {
+        "product_name":    "Absolue Refill System",
+        "positioning":     "Refillable packaging extended across the Absolue and Rénergie lines — luxury skincare with a circular design commitment.",
+        "consumer":        "Premium skincare consumers who want their luxury purchase to reflect their environmental values.",
+        "price_tier":      "Refills at 20–30% discount vs. full price",
+        "gap":             "Refillable packaging exists on only 2 SKUs. The rest of the catalog has no refill option.",
+    },
+    "SPF & Sun Protection": {
+        "product_name":    "Génifique UV Defense SPF 50",
+        "positioning":     "Daily SPF 50 serum-cream delivering Génifique's microbiome complex with broad-spectrum protection — one step, complete defense.",
+        "consumer":        "Consumers who use Génifique daily and resent having to add a separate sunscreen step.",
+        "price_tier":      "$110 – $150",
+        "gap":             "Génifique ($220) and Absolue ($280) — Lancôme's top two SKUs — both lack SPF.",
+    },
+    "Price & Value": {
+        "product_name":    "Génifique Discovery Set",
+        "positioning":     "An entry-priced trial trio of Lancôme's top serums — the bridge from mass-market to Luxe.",
+        "consumer":        "Aspiring prestige consumers who consider Lancôme but hesitate at full-price entry.",
+        "price_tier":      "$45 – $65 (3-piece set)",
+        "gap":             "No structured entry-price acquisition product in the Génifique franchise.",
+    },
+    "Shade Range & Inclusivity": {
+        "product_name":    "Teint Idole Inclusive Edit",
+        "positioning":     "20 new deeper and fairer shades for Teint Idole, developed from Lancôme's 22,000-skin-tone database.",
+        "consumer":        "Prestige foundation buyers at the edges of the current shade range — deep tones underserved by luxury brands.",
+        "price_tier":      "Same as existing Teint Idole ($53 – $63)",
+        "gap":             "Despite 55 shades, consumers still signal shade mismatches at the extremes.",
+    },
+    "Longevity & Wear": {
+        "product_name":    "Teint Idole 48H Ultra Wear",
+        "positioning":     "A 48-hour transfer-proof foundation — Lancôme's most durable formula for consumers who can't touch up.",
+        "consumer":        "Active, busy consumers who need makeup to last through sweat, heat, and long days.",
+        "price_tier":      "$58 – $68",
+        "gap":             "Teint Idole Ultra Wear claims 24H — no 48H or waterproof-first hero exists in the lineup.",
+    },
+}
+
 with tab5:
     st.header("💡 Opportunity Brief")
-    st.caption("Synthesized from 600K+ reviews, desire signal classification, and competitive benchmarks")
+    st.caption("A product launch brief built from 5,951 Lancôme reviews — synthesized for brand decision-making")
 
-    top_opp  = df_whitespace.sort_values("OPPORTUNITY_SCORE", ascending=False).iloc[0]
     top_vol  = df_whitespace.iloc[0]
+    top_frus = df_whitespace.sort_values("AVG_RATING").iloc[0]
     lancome  = df_competitors[df_competitors["IS_LANCOME"] == True]
     others   = df_competitors[df_competitors["IS_LANCOME"] == False].head(5)
-    lancome_rating    = float(lancome["AVG_RATING"].iloc[0])  if not lancome.empty else 0
-    competitor_avg    = float(others["AVG_RATING"].mean())    if not others.empty  else 0
-    lancome_desire    = float(lancome["DESIRE_RATE"].iloc[0]) if not lancome.empty else 0
-    competitor_desire = float(others["DESIRE_RATE"].mean())   if not others.empty  else 0
+    lancome_rating = float(lancome["AVG_RATING"].iloc[0]) if not lancome.empty else 0
+    competitor_avg = float(others["AVG_RATING"].mean())   if not others.empty  else 0
+    delta          = round(lancome_rating - competitor_avg, 2)
+    direction      = "above" if delta >= 0 else "below"
 
-    # ── Priority theme callout ─────────────────────────────────────────────────
-    st.markdown(
-        f"### Priority Whitespace: **{top_opp['DESIRE_CATEGORY']}**"
-    )
-
-    m1, m2, m3 = st.columns(3)
-    m1.metric("Opportunity Score",  f"{top_opp['OPPORTUNITY_SCORE']:.4f}")
-    m2.metric("Affected Reviewers", f"{int(top_opp['UNIQUE_REVIEWERS']):,}")
-    m3.metric("Avg Rating on Theme", f"{top_opp['AVG_RATING']} ★")
-
-    st.divider()
-
-    # ── Competitor comparison charts ───────────────────────────────────────────
-    st.subheader("Lancôme vs. Competitors — Where the Gap Lives")
-
-    df_brief_comp = pd.concat([lancome, others], ignore_index=True)
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        fig_c1 = px.bar(
-            df_brief_comp.sort_values("DESIRE_RATE"),
-            x="DESIRE_RATE", y="BRAND_NAME", orientation="h",
-            color="IS_LANCOME",
-            color_discrete_map={True: ROSE, False: GRAY},
-            labels={"DESIRE_RATE": "Unmet Need Rate (%)", "BRAND_NAME": ""},
-            title="Unmet Need Rate vs. Top Competitors",
-            text="DESIRE_RATE",
-        )
-        fig_c1.update_traces(texttemplate="%{text:.1f}%", textposition="outside",
-                             marker_line_width=0)
-        fig_c1.update_layout(showlegend=False)
-        st.plotly_chart(style(fig_c1), use_container_width=True)
-
-    with col2:
-        fig_c2 = px.bar(
-            df_brief_comp.sort_values("COMPLAINT_RATE"),
-            x="COMPLAINT_RATE", y="BRAND_NAME", orientation="h",
-            color="IS_LANCOME",
-            color_discrete_map={True: ROSE, False: GRAY},
-            labels={"COMPLAINT_RATE": "Complaint Rate (%)", "BRAND_NAME": ""},
-            title="Complaint Rate vs. Top Competitors",
-            text="COMPLAINT_RATE",
-        )
-        fig_c2.update_traces(texttemplate="%{text:.1f}%", textposition="outside",
-                             marker_line_width=0)
-        fig_c2.update_layout(showlegend=False)
-        st.plotly_chart(style(fig_c2), use_container_width=True)
-
-    st.divider()
-
-    # ── Narrative ─────────────────────────────────────────────────────────────
-    st.subheader("What the Data Says")
-
-    delta = round(lancome_rating - competitor_avg, 2)
-    direction = "above" if delta >= 0 else "below"
-    desire_comparison = (
-        "more vocal about unmet needs than the average competitor"
-        if lancome_desire > competitor_desire
-        else "on par with peers in unmet need signaling — but specific categories stand out"
+    # ── #1 Recommendation card ─────────────────────────────────────────────────
+    top_concept = CONCEPTS[top_vol["DESIRE_CATEGORY"]]
+    top_quote_df = df_desires[df_desires["DESIRE_CATEGORY"] == top_vol["DESIRE_CATEGORY"]]
+    top_quote = (
+        top_quote_df.sort_values("RATING").iloc[0]["REVIEW_TEXT"][:280]
+        if not top_quote_df.empty else ""
     )
 
     st.markdown(f"""
-**Desire signal volume:**
-{kpi['DESIRE_RATE']}% of Lancôme's {int(kpi['TOTAL_REVIEWS']):,} Sephora reviews contain
-explicit desire language. The highest-volume theme is **{top_vol['DESIRE_CATEGORY']}**
-({int(top_vol['DESIRE_COUNT'])} reviews).
+<div style="background:#FDF6F5;border-left:4px solid {ROSE};padding:1.5rem 2rem;border-radius:6px;margin-bottom:1rem;">
+<p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:{ROSE};margin:0 0 0.3rem 0;">
+#1 PRODUCT OPPORTUNITY — HIGHEST CONSUMER SIGNAL</p>
+<h2 style="margin:0 0 0.2rem 0;font-size:1.6rem;">{top_concept['product_name']}</h2>
+<p style="color:#555;font-size:0.95rem;margin:0 0 1.2rem 0;font-style:italic;">{top_concept['positioning']}</p>
+<table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+<tr>
+<td style="padding:0.3rem 1rem 0.3rem 0;color:#888;white-space:nowrap;">Target consumer</td>
+<td style="padding:0.3rem 0;">{top_concept['consumer']}</td>
+</tr>
+<tr>
+<td style="padding:0.3rem 1rem 0.3rem 0;color:#888;white-space:nowrap;">Suggested price tier</td>
+<td style="padding:0.3rem 0;">{top_concept['price_tier']}</td>
+</tr>
+<tr>
+<td style="padding:0.3rem 1rem 0.3rem 0;color:#888;white-space:nowrap;">The gap</td>
+<td style="padding:0.3rem 0;">{top_concept['gap']}</td>
+</tr>
+<tr>
+<td style="padding:0.3rem 1rem 0.3rem 0;color:#888;white-space:nowrap;">Signal strength</td>
+<td style="padding:0.3rem 0;"><strong>{int(top_vol['DESIRE_COUNT'])} desire reviews</strong> · {int(top_vol['UNIQUE_REVIEWERS'])} unique consumers · {top_vol['AVG_RATING']} ★ avg</td>
+</tr>
+</table>
+{"<p style='margin:1rem 0 0 0;font-size:0.85rem;color:#555;border-top:1px solid #EEE;padding-top:0.8rem;'><em>&ldquo;" + top_quote + "&hellip;&rdquo;</em></p>" if top_quote else ""}
+</div>
+""", unsafe_allow_html=True)
 
-**Where the gap is deepest:**
-Adjusting for satisfaction, **{top_opp['DESIRE_CATEGORY']}** carries the highest opportunity
-score ({top_opp['OPPORTUNITY_SCORE']:.4f}) — consumers not only want this, they are leaving
-lower ratings ({top_opp['AVG_RATING']} ★) on products in this theme. That combination signals
-a real product gap, not just a preference.
-
-**Competitive position:**
-Lancôme averages **{lancome_rating} ★** vs. a competitor average of **{competitor_avg:.2f} ★** —
-{abs(delta)} stars {direction} the field. Its unmet need rate of **{lancome_desire:.1f}%**
-means Lancôme consumers are {desire_comparison}.
-""")
+    st.markdown(f"""
+<div style="background:#F5F8FD;border-left:4px solid #7A9CC5;padding:1.2rem 2rem;border-radius:6px;margin-bottom:1.5rem;">
+<p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:#7A9CC5;margin:0 0 0.3rem 0;">
+HIGHEST FRUSTRATION — LOWEST AVG RATING</p>
+<h3 style="margin:0 0 0.2rem 0;">{CONCEPTS[top_frus['DESIRE_CATEGORY']]['product_name']}</h3>
+<p style="color:#555;font-size:0.9rem;margin:0 0 0.8rem 0;font-style:italic;">{CONCEPTS[top_frus['DESIRE_CATEGORY']]['positioning']}</p>
+<p style="font-size:0.85rem;color:#555;margin:0;">
+<strong>{int(top_frus['DESIRE_COUNT'])} desire reviews</strong> · {int(top_frus['UNIQUE_REVIEWERS'])} unique consumers · <strong>{top_frus['AVG_RATING']} ★ avg</strong> (most dissatisfied segment)
+</p>
+</div>
+""", unsafe_allow_html=True)
 
     st.divider()
 
-    # ── Recommendation ────────────────────────────────────────────────────────
-    st.subheader("Recommendation")
+    # ── Product Concept Generator ──────────────────────────────────────────────
+    st.subheader("Product Concept Generator")
+    st.markdown(
+        "Select any whitespace theme to generate a product brief — "
+        "built from real consumer signal data and a proposed Lancôme product concept."
+    )
 
-    st.success(f"""
-**Action → Expected Outcome**
+    all_themes = df_whitespace["DESIRE_CATEGORY"].tolist()
+    selected = st.selectbox("Choose a theme to explore", all_themes, key="brief_gen")
 
-Launch a Lancôme product directly targeting **{top_opp['DESIRE_CATEGORY']}** —
-the whitespace where consumer desire is most intense relative to current satisfaction.
+    row     = df_whitespace[df_whitespace["DESIRE_CATEGORY"] == selected].iloc[0]
+    concept = CONCEPTS.get(selected, {})
 
-With **{int(top_opp['UNIQUE_REVIEWERS']):,} unique reviewers** signaling this need and an average
-rating of **{top_opp['AVG_RATING']} ★** on affected products, this gap is both wide and painful.
-No top competitor has fully closed it.
+    quote_df = df_desires[df_desires["DESIRE_CATEGORY"] == selected]
+    quote = (
+        quote_df.sort_values("RATING").iloc[0]["REVIEW_TEXT"][:280]
+        if not quote_df.empty else "No desire reviews found for this theme."
+    )
 
-→ **Expected outcome:** Capturing this whitespace converts high-intent, underserved consumers
-into loyal Lancôme advocates — directly supporting L'Oréal Luxe growth targets and reinforcing
-Lancôme's position as the innovating authority in premium beauty.
-""")
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Desire Reviews",   f"{int(row['DESIRE_COUNT']):,}")
+    c2.metric("Unique Reviewers", f"{int(row['UNIQUE_REVIEWERS']):,}")
+    c3.metric("Avg Rating",       f"{row['AVG_RATING']} ★")
+
+    st.markdown(f"""
+<div style="background:#FAFAFA;border:1px solid #E5E5E5;padding:1.5rem 2rem;border-radius:6px;margin-top:1rem;">
+<p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:#999;margin:0 0 0.5rem 0;">PROPOSED PRODUCT CONCEPT</p>
+<h3 style="margin:0 0 0.3rem 0;">{concept.get('product_name', '—')}</h3>
+<p style="color:#555;font-style:italic;margin:0 0 1rem 0;font-size:0.95rem;">{concept.get('positioning', '—')}</p>
+<table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+<tr>
+<td style="padding:0.3rem 1rem 0.3rem 0;color:#888;white-space:nowrap;">Target consumer</td>
+<td>{concept.get('consumer', '—')}</td>
+</tr>
+<tr>
+<td style="padding:0.3rem 1rem 0.3rem 0;color:#888;white-space:nowrap;">Price tier</td>
+<td>{concept.get('price_tier', '—')}</td>
+</tr>
+<tr>
+<td style="padding:0.3rem 1rem 0.3rem 0;color:#888;white-space:nowrap;">Catalog gap</td>
+<td>{concept.get('gap', '—')}</td>
+</tr>
+</table>
+<p style="margin:1rem 0 0 0;font-size:0.85rem;color:#555;border-top:1px solid #EEE;padding-top:0.8rem;">
+<strong>What a consumer said:</strong><br>
+<em>&ldquo;{quote}&hellip;&rdquo;</em>
+</p>
+</div>
+""", unsafe_allow_html=True)
