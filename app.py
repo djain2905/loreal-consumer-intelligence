@@ -673,15 +673,35 @@ with tab5:
 </div>
 """, unsafe_allow_html=True)
 
+    frus_concept   = CONCEPTS[top_frus["DESIRE_CATEGORY"]]
+    frus_quote_df  = df_desires[df_desires["DESIRE_CATEGORY"] == top_frus["DESIRE_CATEGORY"]]
+    frus_quote     = best_quote(frus_quote_df, top_frus["DESIRE_CATEGORY"])
+
     st.markdown(f"""
-<div style="background:#F5F8FD;border-left:4px solid #7A9CC5;padding:1.2rem 2rem;border-radius:6px;margin-bottom:1.5rem;">
+<div style="background:#FDF6F5;border-left:4px solid #7A9CC5;padding:1.5rem 2rem;border-radius:6px;margin-bottom:1.5rem;">
 <p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:#7A9CC5;margin:0 0 0.3rem 0;">
 HIGHEST FRUSTRATION — LOWEST AVG RATING</p>
-<h3 style="margin:0 0 0.2rem 0;">{CONCEPTS[top_frus['DESIRE_CATEGORY']]['product_name']}</h3>
-<p style="color:#555;font-size:0.9rem;margin:0 0 0.8rem 0;font-style:italic;">{CONCEPTS[top_frus['DESIRE_CATEGORY']]['positioning']}</p>
-<p style="font-size:0.85rem;color:#555;margin:0;">
-<strong>{int(top_frus['DESIRE_COUNT'])} desire reviews</strong> · {int(top_frus['UNIQUE_REVIEWERS'])} unique consumers · <strong>{top_frus['AVG_RATING']} ★ avg</strong> (most dissatisfied segment)
-</p>
+<h2 style="margin:0 0 0.2rem 0;font-size:1.6rem;">{frus_concept['product_name']}</h2>
+<p style="color:#555;font-size:0.95rem;margin:0 0 1.2rem 0;font-style:italic;">{frus_concept['positioning']}</p>
+<table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+<tr>
+<td style="padding:0.3rem 1rem 0.3rem 0;color:#888;white-space:nowrap;">Target consumer</td>
+<td style="padding:0.3rem 0;">{frus_concept['consumer']}</td>
+</tr>
+<tr>
+<td style="padding:0.3rem 1rem 0.3rem 0;color:#888;white-space:nowrap;">Suggested price tier</td>
+<td style="padding:0.3rem 0;">{frus_concept['price_tier']}</td>
+</tr>
+<tr>
+<td style="padding:0.3rem 1rem 0.3rem 0;color:#888;white-space:nowrap;">The gap</td>
+<td style="padding:0.3rem 0;">{frus_concept['gap']}</td>
+</tr>
+<tr>
+<td style="padding:0.3rem 1rem 0.3rem 0;color:#888;white-space:nowrap;">Signal strength</td>
+<td style="padding:0.3rem 0;"><strong>{int(top_frus['DESIRE_COUNT'])} desire reviews</strong> · {int(top_frus['UNIQUE_REVIEWERS'])} unique consumers · <strong>{top_frus['AVG_RATING']} ★ avg</strong> (most dissatisfied segment)</td>
+</tr>
+</table>
+{"<p style='margin:1rem 0 0 0;font-size:0.85rem;color:#555;border-top:1px solid #EEE;padding-top:0.8rem;'><em>&ldquo;" + frus_quote + "&rdquo;</em></p>" if frus_quote else ""}
 </div>
 """, unsafe_allow_html=True)
 
