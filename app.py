@@ -512,26 +512,63 @@ CONCEPTS = {
 }
 
 THEME_KEYWORDS = {
-    "Sensitive Skin Formula": ["sensitiv", "reaction", "irritat", "hypoallergenic", "fragrance-free", "broke out", "breaking out", "rash", "allerg", "reactive skin"],
-    "Texture & Formula":      ["too heavy", "too thick", "too greasy", "texture", "consistency", "absorb", "greasy", "lightweight formula", "feels heavy", "pilling"],
-    "Fragrance & Scent":      ["fragrance", "scent", "smell", "perfume", "odor"],
-    "Packaging & Format":     ["packaging", "pump", "dispenser", "applicator design", "bottle design", "travel size", "hard to open", "messy"],
-    "SPF & Sun Protection":   ["spf", "sunscreen", "sun protection", "uv", "sunburn"],
-    "Key Ingredients":        ["vitamin c", "retinol", "hyaluronic", "niacinamide", "peptide", "aha", "bha", "active ingredient"],
-    "Price & Value":          ["too expensive", "price", "worth the price", "value for", "cost", "afford", "cheaper alternative"],
-    "Shade Range & Inclusivity": ["shade", "undertone", "skin tone", "complexion", "pale", "yellow on", "orange on", "runs pale", "runs yellow", "runs orange", "too dark for", "too light for", "too pink", "too ashy", "oxidize", "oxidise", "colour range", "color range", "inclusiv", "match my skin", "match my complexion", "deeper shade", "lighter shade"],
-    "Longevity & Wear":       ["didn't last", "doesn't last", "wear off", "fades", "lasts all day", "all day wear", "transfer", "longevity", "wore off"],
+    "Sensitive Skin Formula": [
+        "broke me out", "breaking out", "broke out", "caused acne", "caused breakout",
+        "skin reaction", "had a reaction", "allergic reaction", "hives", "rash",
+        "irritated my skin", "burned my skin", "sensitive skin", "reactive skin",
+        "clogged my pores", "clogged pores", "pimples", "inflammation",
+    ],
+    "Texture & Formula": [
+        "too heavy", "too thick", "too greasy", "too oily", "pilling", "pills up",
+        "balls up", "doesn't absorb", "won't absorb", "sits on top of",
+        "clogs pores", "feels heavy", "so heavy", "very greasy",
+    ],
+    "Fragrance & Scent": [
+        "the smell", "the scent", "too strong", "overpowering", "perfumey",
+        "chemical smell", "fragrance is", "scent is", "smells like", "strong fragrance",
+        "heavy scent", "fragrance free", "no fragrance",
+    ],
+    "Packaging & Format": [
+        "pump broke", "pump doesn't work", "pump stopped", "hard to get out",
+        "hard to open", "waste product", "dispenser broke", "bottle broke",
+        "packaging is", "applicator", "messy", "leaks",
+    ],
+    "SPF & Sun Protection": [
+        "wish it had spf", "needs spf", "no spf", "add spf", "without spf",
+        "no sun protection", "wish it included sunscreen", "if only it had spf",
+    ],
+    "Key Ingredients": [
+        "wish it had", "needs more", "vitamin c", "retinol", "hyaluronic acid",
+        "niacinamide", "more antioxidant", "better ingredients", "if it had",
+    ],
+    "Price & Value": [
+        "$", "hundred dollar", "dollars for", "not worth the price", "not worth",
+        "overpriced", "too expensive", "cheaper", "half the price", "price tag",
+        "for the price", "at this price", "paying this much",
+    ],
+    "Shade Range & Inclusivity": [
+        "couldn't find my shade", "no shade for", "doesn't match my skin",
+        "wrong shade", "runs pale", "runs yellow", "runs orange", "runs pink",
+        "too yellow on", "too pink on", "too orange on", "oxidizes on me",
+        "shade range", "more shades", "my undertone", "shade doesn't match",
+    ],
+    "Longevity & Wear": [
+        "didn't last", "doesn't last", "wore off by", "faded by noon", "faded by lunch",
+        "only lasted", "hours and it", "transferred", "creased", "wore off after",
+    ],
 }
 
 def best_quote(df: pd.DataFrame, theme: str) -> str:
     keywords = THEME_KEYWORDS.get(theme, [])
-    if keywords:
-        pattern = "|".join(keywords)
-        relevant = df[df["REVIEW_TEXT"].str.lower().str.contains(pattern, na=False)]
-        if not relevant.empty:
-            return relevant.sort_values("RATING").iloc[0]["REVIEW_TEXT"]
-        return ""  # no relevant quote found — don't surface an off-topic one
-    return df.sort_values("RATING").iloc[0]["REVIEW_TEXT"] if not df.empty else ""
+    if not keywords:
+        return df.sort_values("RATING").iloc[0]["REVIEW_TEXT"] if not df.empty else ""
+    text_lower = df["REVIEW_TEXT"].str.lower()
+    df = df.copy()
+    df["_score"] = sum(text_lower.str.contains(kw, na=False).astype(int) for kw in keywords)
+    relevant = df[df["_score"] > 0]
+    if relevant.empty:
+        return ""
+    return relevant.sort_values(["_score", "RATING"], ascending=[False, True]).iloc[0]["REVIEW_TEXT"]
 
 with tab5:
     st.header("💡 Opportunity Brief")
