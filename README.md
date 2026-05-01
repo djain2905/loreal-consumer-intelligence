@@ -1,6 +1,6 @@
 # L'Oréal Consumer Intelligence
 
-This project identifies product whitespace opportunities for Lancôme by detecting desire language in 600K+ verified Sephora consumer reviews. It pulls structured review data from the Kaggle API, loads it into Snowflake, transforms it through a dbt star schema, and surfaces consumer insights through a deployed Streamlit dashboard. A parallel knowledge base — built from 16 scraped sources across Lancôme.com, L'Oréal.com, WWD, Sephora, and Wikipedia — provides brand and market context that makes the quantitative signals interpretable. The central output is a ranked whitespace analysis: which product gaps have the most consumers behind them, the most dissatisfaction, and the least competitive coverage.
+This project identifies product whitespace opportunities for Lancôme by detecting desire language in 600K+ verified Sephora consumer reviews. It pulls structured review data from the Kaggle API, loads it into Snowflake, transforms it through a dbt star schema, and surfaces consumer insights through a deployed Streamlit dashboard. A parallel knowledge base — built from 19 scraped sources across Lancôme.com, L'Oréal.com, WWD, Sephora, and Wikipedia — provides brand and market context that makes the quantitative signals interpretable. The central output is a ranked whitespace analysis: which product gaps have the most consumers behind them, the most dissatisfaction, and the least competitive coverage.
 
 ---
 
@@ -19,7 +19,7 @@ This project directly demonstrates the role's core skill requirement — "genera
 | Layer | Tool |
 |---|---|
 | Source 1 | Kaggle API — Sephora Products & Skincare Reviews dataset |
-| Source 2 | Firecrawl — web scrape of Lancôme.com, L'Oréal.com, WWD, Sephora, Wikipedia |
+| Source 2 | Firecrawl — web scrape of Lancôme.com, L'Oréal.com, WWD, Sephora, Wikipedia (19 sources) |
 | Data Warehouse | Snowflake (AWS US East 1) |
 | Transformation | dbt (10 models, 54 tests) |
 | Orchestration | GitHub Actions (weekly schedule + manual trigger) |
@@ -46,7 +46,7 @@ flowchart TD
         E["RAW.SEPHORA_REVIEWS\nRAW.LANCOME_CATALOG"]
     end
 
-    subgraph KnowledgeRaw ["knowledge/raw/ (16 .md files)"]
+    subgraph KnowledgeRaw ["knowledge/raw/ (19 .md files)"]
         F["Scraped markdown sources"]
     end
 
@@ -132,7 +132,7 @@ erDiagram
 
 ## Knowledge Base
 
-A Claude Code-curated wiki built from 16 scraped sources across 5 sites. Wiki pages live in `knowledge/wiki/`, raw sources in `knowledge/raw/`. Browse `knowledge/index.md` to see all pages.
+A Claude Code-curated wiki built from 19 scraped sources across 5 sites. Wiki pages live in `knowledge/wiki/`, raw sources in `knowledge/raw/`. Browse `knowledge/index.md` to see all pages.
 
 **Query it:** Open Claude Code in this repo and ask questions like:
 
@@ -195,20 +195,29 @@ Claude Code reads the wiki pages first and falls back to raw sources when needed
 ```
 .
 ├── .github/workflows/          # GitHub Actions pipelines (Kaggle + Firecrawl)
+├── data/                       # Local Kaggle CSV snapshots (gitignored)
+│   ├── product_info.csv
+│   └── reviews_*.csv           # 5 review slices (0-250 through 1250-end)
 ├── dbt/                        # dbt project
 │   └── models/
 │       ├── staging/            # stg_sephora_reviews, stg_sephora_products, stg_lancome_catalog
 │       └── mart/               # fct_reviews, dim_products, dim_brands, mart_* tables
+├── docs/
+│   ├── dashboard-preview.png
+│   ├── job-posting.pdf
+│   ├── lancome-consumer-intelligence-slides.pptx
+│   ├── proposal.md
+│   ├── project-requirements-README.md
+│   └── resume.pdf
 ├── knowledge/
-│   ├── raw/                    # 16 scraped .md sources (5 sites)
+│   ├── raw/                    # 19 scraped .md sources (5 sites)
 │   ├── wiki/                   # Claude Code-generated wiki pages
 │   └── index.md                # Index of all wiki pages and raw sources
 ├── scripts/
 │   ├── extract_kaggle.py       # Kaggle API → Snowflake RAW
-│   └── extract_firecrawl.py    # Firecrawl → knowledge/raw/
-├── docs/
-│   ├── proposal.md
-│   └── job-posting.pdf
+│   ├── extract_firecrawl.py    # Firecrawl → knowledge/raw/
+│   ├── generate_slides.py      # Auto-generate PowerPoint slides
+│   └── test_snowflake.py       # Snowflake connection smoke test
 ├── app.py                      # Streamlit dashboard
 ├── requirements.txt
 ├── .env.example                # Required environment variables (template)
