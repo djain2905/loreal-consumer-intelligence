@@ -21,8 +21,9 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('dim_products')
-              field: product_id
+              arguments:
+                to: ref('dim_products')
+                field: product_id
       - name: author_id
         description: Sephora reviewer identifier.
         tests:
@@ -93,8 +94,9 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('dim_brands')
-              field: brand_name
+              arguments:
+                to: ref('dim_brands')
+                field: brand_name
       - name: price_usd
         description: Product price in USD.
       - name: price_tier
