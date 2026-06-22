@@ -1,0 +1,474 @@
+[Skip to main content](https://wwd.com/tag/loreal/#pagetop)
+
+Fashion
+
+### [Prada Men’s Spring 2027: The Jeans Genies](https://wwd.com/runway/mens-spring-2027/milan/prada/review/)
+
+Business
+
+### [Loewe Appoints Eloise Hautcoeur](https://wwd.com/business-news/human-resources/loewe-global-communications-director-1239018441/)
+
+Fashion
+
+### [Alexander McQueen to Return to London Fashion Week](https://wwd.com/fashion-news/fashion-features/alexander-mcqueen-london-fashion-week-september-runway-show-1239018868/)
+
+## L’Oréal
+
+[+\\
+Business](https://wwd.com/business-news/) [+\\
+Technology](https://wwd.com/business-news/technology/)
+
+### [Inside VivaTech: AI Discovery, GEO and the New Attention Economy](https://wwd.com/business-news/technology/inside-vivatech-ai-geo-attention-economy-fashion-1239018870/)
+
+Across the three-day conference, fashion and beauty executives discussed the transition in search and…
+
+By
+
+[Rhonda Richford](https://wwd.com/wwd-masthead/rrichford/)
+
+3 days ago
+
+[![](https://wwd.com/wp-content/uploads/2026/06/GettyImages-2281414477.jpg?w=681&h=383&crop=1)](https://wwd.com/business-news/technology/inside-vivatech-ai-geo-attention-economy-fashion-1239018870/)
+
+[+\\
+Men's](https://wwd.com/menswear-news/) [+\\
+Mens Lifestyle](https://wwd.com/menswear-news/mens-lifestyle/)
+
+### [Fathers and Sons in the Spotlight](https://wwd.com/menswear-news/mens-lifestyle/fathers-day-lunch-mark-weber-jarrod-weber-david-greenberg-1239018867/)
+
+The Father's Day lunch honored Mark and Jarrod Weber, L'Oréal's David Greenberg, fallen firefighters and an…
+
+By
+
+[Jean E. Palmieri](https://wwd.com/wwd-masthead/jean-e-palmieri/)
+
+3 days ago
+
+[![](https://wwd.com/wp-content/uploads/2026/06/FathersDay2026-110.jpg?w=681&h=383&crop=1)](https://wwd.com/menswear-news/mens-lifestyle/fathers-day-lunch-mark-weber-jarrod-weber-david-greenberg-1239018867/)
+
+[+\\
+Beauty](https://wwd.com/beauty-industry-news/) [+\\
+Beauty Features](https://wwd.com/beauty-industry-news/beauty-features/)
+
+### [L’Oréal Commits an Additional 20 Million Euros to Climate Emergency Fund Over Next Four Years](https://wwd.com/beauty-industry-news/beauty-features/loreal-further-20-million-euros-climate-emergency-fund-1239014417/)
+
+Ezgi Barcenas, chief corporate responsibility officer at L'Oréal, announced the enriched funding during a…
+
+By
+
+[Samantha Conti](https://wwd.com/wwd-masthead/samantha-conti/)
+
+Jun 17, 2026, 11:52am
+
+[![](https://wwd.com/wp-content/uploads/2024/09/Ezgi-Barcenas-headshot-1.jpg?w=390&h=550&crop=1)](https://wwd.com/beauty-industry-news/beauty-features/loreal-further-20-million-euros-climate-emergency-fund-1239014417/)
+
+- [![The new Burlington Stores distribution center in Ellabell, Ga.](https://wwd.com/wp-content/themes/vip/pmc-wwd-2021/assets/public/lazyload-fallback.gif)](https://wwd.com/business-news/retail/burlington-distribution-center-georgia-heady-growth-1239014827/)
+
+
+
+
+
+
+
+
+
+### [Burlington Launches State-of-the-art Distribution Center to Support Heady Growth](https://wwd.com/business-news/retail/burlington-distribution-center-georgia-heady-growth-1239014827/)
+
+
+
+  - [Retail](https://wwd.com/business-news/retail/)
+
+  - By
+
+
+    [David Moin](https://wwd.com/wwd-masthead/david-moin/)
+
+
+- [![David Jones new chief executive officer Erica Berchtold](https://wwd.com/wp-content/themes/vip/pmc-wwd-2021/assets/public/lazyload-fallback.gif)](https://wwd.com/fashion-news/designer-luxury/david-jones-ceo-new-1239021387/)
+
+
+
+
+
+
+
+
+
+### [Australia’s David Jones Appoints Erica Berchtold as CEO](https://wwd.com/fashion-news/designer-luxury/david-jones-ceo-new-1239021387/)
+
+
+
+  - [Designer and Luxury](https://wwd.com/fashion-news/designer-luxury/)
+
+  - By
+
+
+    [Patty Huntington](https://wwd.com/wwd-masthead/patty-huntington/)
+
+
+- [![Philipp Plein Men's Spring 2027 Ready-to-Wear](https://wwd.com/wp-content/themes/vip/pmc-wwd-2021/assets/public/lazyload-fallback.gif)](https://wwd.com/runway/mens-spring-2027/milan/philipp-plein/review/)
+
+
+
+
+
+
+
+
+
+### [Philipp Plein Spring 2027: Tailoring Twist](https://wwd.com/runway/mens-spring-2027/milan/philipp-plein/review/)
+
+
+
+  - [Fashion Show Reviews](https://wwd.com/fashion-news/shows-reviews/)
+
+  - By
+
+
+    [Andrea Onate](https://wwd.com/wwd-masthead/andrea-onate/)
+
+
+### [Subscribe to our Newsletter](https://wwd.com/tag/loreal/\#)
+
+Get all the top news stories and alerts straight to your inbox.
+
+Your Email
+
+Sign Up Sign Up
+
+By providing your information, you agree to our [Terms of Use](https://pmc.com/terms-of-use) and our [Privacy Policy](https://pmc.com/privacy-policy).
+We use vendors that may also process your information to help provide our services. // This site is protected by reCAPTCHA Enterprise and the Google [Privacy Policy](https://policies.google.com/privacy) and [Terms of Service](https://policies.google.com/terms) apply.
+
+[+\\
+Beauty](https://wwd.com/beauty-industry-news/) [+\\
+Beauty Features](https://wwd.com/beauty-industry-news/beauty-features/)
+
+### [L’Oréal Partners With OpenAI](https://wwd.com/beauty-industry-news/beauty-features/loreal-partners-openai-vivatech-1239013466/)
+
+The French beauty giant is out to solve what it calls "the 11-minute paradox" in the consumer's journey.
+
+By
+
+[Jennifer Weil](https://wwd.com/wwd-masthead/jennifer-weil/)
+
+Jun 17, 2026, 3:00am
+
+[![](https://wwd.com/wp-content/themes/vip/pmc-wwd-2021/assets/public/lazyload-fallback.gif)](https://wwd.com/beauty-industry-news/beauty-features/loreal-partners-openai-vivatech-1239013466/)
+
+[+\\
+Beauty](https://wwd.com/beauty-industry-news/) [+\\
+Fragrance](https://wwd.com/beauty-industry-news/fragrance/)
+
+### [Fragrance’s Heavy Hitters Weigh In on Category’s Future](https://wwd.com/beauty-industry-news/fragrance/fragrance-foundation-awards-executive-analysis-1239008872/)
+
+At the 2026 Fragrance Foundation Awards Thursday, industry titans shared their assessment of the industry and…
+
+By
+
+[James Manso](https://wwd.com/wwd-masthead/james-manso/), [Kathryn Hopkins](https://wwd.com/wwd-masthead/kathryn-hopkins/), [Noor Lobad](https://wwd.com/wwd-masthead/noor-lobad/)
+
+Jun 16, 2026, 12:01am
+
+[![](https://wwd.com/wp-content/themes/vip/pmc-wwd-2021/assets/public/lazyload-fallback.gif)](https://wwd.com/beauty-industry-news/fragrance/fragrance-foundation-awards-executive-analysis-1239008872/)
+
+[Icon Linkgallery icon](https://wwd.com/beauty-industry-news/fragrance/fragrance-foundation-awards-executive-analysis-1239008872/ "gallery icon")[view gallery](https://wwd.com/tag/loreal/#)
+
+[+\\
+Beauty](https://wwd.com/beauty-industry-news/) [+\\
+Products](https://wwd.com/beauty-industry-news/products/)
+
+### [L’Oréal Expands Global Campaign for World Refill Day](https://wwd.com/beauty-industry-news/products/loreal-expands-global-campaign-world-refill-day-1239007608/)
+
+The beauty company's cross-divisional, multichannel activation mobilizes its entire ecosystem.
+
+By
+
+[Jennifer Weil](https://wwd.com/wwd-masthead/jennifer-weil/)
+
+Jun 15, 2026, 2:14am
+
+[![](https://wwd.com/wp-content/themes/vip/pmc-wwd-2021/assets/public/lazyload-fallback.gif)](https://wwd.com/beauty-industry-news/products/loreal-expands-global-campaign-world-refill-day-1239007608/)
+
+[+\\
+Beauty](https://wwd.com/beauty-industry-news/) [+\\
+Fragrance](https://wwd.com/beauty-industry-news/fragrance/)
+
+### [L’Oréal Wins Big at the Fragrance Foundation Awards](https://wwd.com/beauty-industry-news/fragrance/loreal-wins-big-fragrance-foundation-awards-1239009179/)
+
+Nordstrom was named Hall of Fame honoree, while master perfumer Honorine Blanc of Dsm-firmenich was given…
+
+By
+
+[Kathryn Hopkins](https://wwd.com/wwd-masthead/kathryn-hopkins/)
+
+Jun 12, 2026, 2:05pm
+
+[![](https://wwd.com/wp-content/themes/vip/pmc-wwd-2021/assets/public/lazyload-fallback.gif)](https://wwd.com/beauty-industry-news/fragrance/loreal-wins-big-fragrance-foundation-awards-1239009179/)
+
+[+\\
+Beauty](https://wwd.com/beauty-industry-news/) [+\\
+Beauty Features](https://wwd.com/beauty-industry-news/beauty-features/)
+
+### [CeraVe Elevates Content Creation Competition to Global Stage](https://wwd.com/beauty-industry-news/beauty-features/cerave-elevates-content-creation-competition-global-stage-1238996124/)
+
+Vincent Chauvière, CeraVe global brand president, talked strategy in an exclusive interview.
+
+By
+
+[Jennifer Weil](https://wwd.com/wwd-masthead/jennifer-weil/)
+
+Jun 5, 2026, 4:59am
+
+[![](https://wwd.com/wp-content/themes/vip/pmc-wwd-2021/assets/public/lazyload-fallback.gif)](https://wwd.com/beauty-industry-news/beauty-features/cerave-elevates-content-creation-competition-global-stage-1238996124/)
+
+[+\\
+Beauty](https://wwd.com/beauty-industry-news/) [+\\
+Skin Care](https://wwd.com/beauty-industry-news/skin-care/)
+
+### [SkinCeuticals Is Scuderia Ferrari HP’s First Skin Care Partner](https://wwd.com/beauty-industry-news/skin-care/skinceuticals-scuderia-ferrari-hp-skin-care-partner-1238990618/)
+
+The partnership will entail various activations and campaigns.
+
+By
+
+[James Manso](https://wwd.com/wwd-masthead/james-manso/)
+
+Jun 3, 2026, 12:01am
+
+[![](https://wwd.com/wp-content/themes/vip/pmc-wwd-2021/assets/public/lazyload-fallback.gif)](https://wwd.com/beauty-industry-news/skin-care/skinceuticals-scuderia-ferrari-hp-skin-care-partner-1238990618/)
+
+[+\\
+ESG/Sustainability](https://wwd.com/sustainability/) [+\\
+Business](https://wwd.com/sustainability/business/)
+
+### [EXCLUSIVE: LVMH Launches First Human Rights Charter](https://wwd.com/sustainability/business/lvmh-human-rights-charter-1238982768/)
+
+The French luxury group has appointed Julie Vallat vice president, human rights, charged with steering the…
+
+By
+
+[Joelle Diderich](https://wwd.com/wwd-masthead/joelle-diderich/)
+
+May 27, 2026, 11:45am
+
+[![](https://wwd.com/wp-content/themes/vip/pmc-wwd-2021/assets/public/lazyload-fallback.gif)](https://wwd.com/sustainability/business/lvmh-human-rights-charter-1238982768/)
+
+[+\\
+Beauty](https://wwd.com/beauty-industry-news/) [+\\
+Beauty Features](https://wwd.com/beauty-industry-news/beauty-features/)
+
+### [L’Oréal USA’s CEO on Brand, Beauty and Leadership](https://wwd.com/beauty-industry-news/beauty-features/loreal-usa-ceo-leadership-ai-innovation-1238977007/)
+
+Alexis Perakis-Valat, 100 days into his tenure as L'Oréal USA's chief executive officer, outlines the…
+
+By
+
+[James Manso](https://wwd.com/wwd-masthead/james-manso/)
+
+May 26, 2026, 12:01am
+
+[![](https://wwd.com/wp-content/themes/vip/pmc-wwd-2021/assets/public/lazyload-fallback.gif)](https://wwd.com/beauty-industry-news/beauty-features/loreal-usa-ceo-leadership-ai-innovation-1238977007/)
+
+[+\\
+Eye](https://wwd.com/eye/) [+\\
+Parties](https://wwd.com/eye/parties/)
+
+### [Gillian Anderson and L’Oréal Paris Spotlight Next Generation as Momentum for Women Directors Slows](https://wwd.com/eye/parties/loreal-paris-gillian-anderson-cannes-women-filmmakers-1238979931/)
+
+Guests at the "Lights on Women's Worth" award noted that progress for female filmmakers has taken a step…
+
+By
+
+[Rhonda Richford](https://wwd.com/wwd-masthead/rrichford/)
+
+May 23, 2026, 1:13pm
+
+[![](https://wwd.com/wp-content/themes/vip/pmc-wwd-2021/assets/public/lazyload-fallback.gif)](https://wwd.com/eye/parties/loreal-paris-gillian-anderson-cannes-women-filmmakers-1238979931/)
+
+[+\\
+Beauty](https://wwd.com/beauty-industry-news/) [+\\
+Fragrance](https://wwd.com/beauty-industry-news/fragrance/)
+
+### [Master Perfumer Olivier Creed Has Died](https://wwd.com/beauty-industry-news/fragrance/olivier-creed-dies-master-perfumer-house-of-creed-fragrance-brand-1238977189/)
+
+Sixth in his family line to head The House of Creed, he played a pivotal role in transforming the storied…
+
+By
+
+[Sandra Salibian](https://wwd.com/wwd-masthead/sandra-salibian/)
+
+May 21, 2026, 1:39pm
+
+[![](https://wwd.com/wp-content/themes/vip/pmc-wwd-2021/assets/public/lazyload-fallback.gif)](https://wwd.com/beauty-industry-news/fragrance/olivier-creed-dies-master-perfumer-house-of-creed-fragrance-brand-1238977189/)
+
+[+\\
+Beauty](https://wwd.com/beauty-industry-news/) [+\\
+Skin Care](https://wwd.com/beauty-industry-news/skin-care/)
+
+### [EXCLUSIVE: La Roche-Posay Is Raising Awareness Around Acne, With a Little Help From The Minions](https://wwd.com/beauty-industry-news/skin-care/la-roche-posay-acne-campaign-minions-monsters-movie-collaboration-1238954137/)
+
+The dermocosmetics brand is launching a disruptive partnership with Illumination's animated franchise ahead…
+
+By
+
+[Sandra Salibian](https://wwd.com/wwd-masthead/sandra-salibian/)
+
+May 15, 2026, 12:00am
+
+[![](https://wwd.com/wp-content/themes/vip/pmc-wwd-2021/assets/public/lazyload-fallback.gif)](https://wwd.com/beauty-industry-news/skin-care/la-roche-posay-acne-campaign-minions-monsters-movie-collaboration-1238954137/)
+
+[+\\
+Eye](https://wwd.com/eye/) [+\\
+Parties](https://wwd.com/eye/parties/)
+
+### [Jane Fonda and Gong Li Mark Milestones at L’Oréal Party in Cannes](https://wwd.com/eye/parties/jane-fonda-gong-li-loreal-cannes-milestone-party-1238954257/)
+
+The spokeswomen have been with the brand for decades, and were joined by other ambassadors including Aja…
+
+By
+
+[Rhonda Richford](https://wwd.com/wwd-masthead/rrichford/)
+
+May 14, 2026, 10:45am
+
+[![](https://wwd.com/wp-content/themes/vip/pmc-wwd-2021/assets/public/lazyload-fallback.gif)](https://wwd.com/eye/parties/jane-fonda-gong-li-loreal-cannes-milestone-party-1238954257/)
+
+- 1
+- [2](https://wwd.com/tag/loreal/page/2/)
+- [3](https://wwd.com/tag/loreal/page/3/)
+- [4](https://wwd.com/tag/loreal/page/4/)
+- ...
+- [43](https://wwd.com/tag/loreal/page/43/)
+
+[More News →](https://wwd.com/tag/loreal/page/2/)
+
+WWD and Women's Wear Daily are part of Penske Media Corporation. © 2026 Fairchild Publishing, LLC. All Rights Reserved.
+
+[Powered by WordPress.com VIP](https://vip.wordpress.com/?utm_source=vip_powered_wpcom&utm_medium=web&utm_campaign=VIP%20Footer%20Credit)
+
+[WWD](https://wwd.com/ "WWD")
+
+Close the menu
+
+[Account](https://wwd.com/tag/loreal/#)
+
+Welcome
+
+[Manage Account](https://wwd.com/my-account/)
+
+[Log Out](https://wwd.com/tag/loreal/#)
+
+Log In Sign Up
+
+- ### [Fashion](https://wwd.com/fashion-news/)Expand fashion menu
+
+  - [Fashion Trends](https://wwd.com/fashion-news/fashion-trends/)
+  - [Fashion Features](https://wwd.com/fashion-news/fashion-features/)
+  - [Fashion Scoops](https://wwd.com/fashion-news/fashion-scoops/)
+  - [Designer & Luxury](https://wwd.com/fashion-news/designer-luxury/)
+  - [Denim](https://wwd.com/fashion-news/denim/)
+  - [Ready-To-Wear](https://wwd.com/fashion-news/ready-to-wear/)
+  - [Accessories](https://wwd.com/accessories-news/)
+  - [Jewelry](https://wwd.com/accessories-news/jewelry/)
+  - [Handbags](https://wwd.com/accessories-news/handbags/)
+- ### [Business](https://wwd.com/business-news/)Expand business menu
+
+  - [Earnings & Insights](https://wwd.com/p/earnings-and-insights/)
+  - [Financial](https://wwd.com/business-news/financial/)
+  - [Government & Trade](https://wwd.com/business-news/government-trade/)
+  - [Legal](https://wwd.com/business-news/legal/)
+  - [Mergers & Acquisitions](https://wwd.com/business-news/mergers-acquisitions/)
+  - [Marketing & Promotion](https://wwd.com/business-news/marketing-promotion/)
+  - [Human Resources](https://wwd.com/business-news/human-resources/)
+  - [Business Features](https://wwd.com/business-news/business-features/)
+  - [Technology](https://wwd.com/business-news/technology/)
+  - [Real Estate](https://wwd.com/business-news/real-estate/)
+  - [Markets](https://wwd.com/business-news/markets/)
+  - [Media](https://wwd.com/business-news/media/)
+  - [Retail](https://wwd.com/business-news/retail/)
+- ### [Beauty](https://wwd.com/beauty-industry-news/)Expand beauty menu
+
+  - [Beauty Features](https://wwd.com/beauty-industry-news/beauty-features/)
+  - [Skin Care](https://wwd.com/beauty-industry-news/skin-care/)
+  - [Fragrance](https://wwd.com/beauty-industry-news/fragrance/)
+  - [Hair](https://wwd.com/beauty-industry-news/hair/)
+  - [Products](https://wwd.com/beauty-industry-news/products/)
+  - [Body Care](https://wwd.com/beauty-industry-news/body-care/)
+  - [Wellness](https://wwd.com/beauty-industry-news/wellness/)
+- ### [Men's](https://wwd.com/menswear-news/)Expand mens menu
+
+  - [Mens Accessories](https://wwd.com/menswear-news/mens-accessories/)
+  - [Mens Clothing Furnishings](https://wwd.com/menswear-news/mens-clothing-furnishings/)
+  - [Mens Designer Luxury](https://wwd.com/menswear-news/mens-designer-luxury/)
+  - [Mens Lifestyle](https://wwd.com/menswear-news/mens-lifestyle/)
+  - [Mens Retail Business](https://wwd.com/menswear-news/mens-retail-business/)
+  - [Mens Sportswear](https://wwd.com/menswear-news/mens-sportswear/)
+  - [Mens Fashion](https://wwd.com/menswear-news/mens-fashion/)
+- ### [Runway](https://wwd.com/runway/)Expand runway menu
+
+  - [Spring Ready-to-Wear 2026](https://wwd.com/runway/)
+  - [Fall Couture 2025](https://wwd.com/runway/fall-couture-2025/)
+  - [Men's Spring 2026](https://wwd.com/runway/mens-spring-2026/)
+  - [Resort 2026](https://wwd.com/runway/resort-2026/)
+  - [Spring Bridal 2026](https://wwd.com/runway/spring-bridal-2026/)
+- ### [Footwear News](https://wwd.com/footwear-news/)Expand footwear-news menu
+
+  - [Shoe Industry News](https://wwd.com/footwear-news/shoe-industry-news/)
+  - [Shoe Features](https://wwd.com/footwear-news/shoe-features/)
+  - [Shoe Trends](https://wwd.com/footwear-news/shoe-trends/)
+  - [Sneaker News](https://wwd.com/footwear-news/sneaker-news/)
+- ### [Sourcing Journal](https://wwd.com/sourcing-journal/)Expand sourcing-journal menu
+
+  - [Denim](https://wwd.com/sourcing-journal/sj-denim/)
+  - [Industry News](https://wwd.com/sourcing-journal/industry-news/)
+  - [Lifestyle Monitor](https://wwd.com/sourcing-journal/lifestyle-monitor/)
+  - [Logistics](https://wwd.com/sourcing-journal/logistics/)
+  - [Reports](https://wwd.com/sourcing-journal/report/)
+  - [SJ Studio](https://wwd.com/tag/sj-studio/)
+  - [Sustainability](https://wwd.com/sourcing-journal/sustainability/)
+  - [Trade](https://wwd.com/sourcing-journal/trade/)
+  - [Videos](https://wwd.com/sourcing-journal/videos/)
+  - [Webinars](https://wwd.com/sourcing-journal/webinar/)
+- ### [Sustainability](https://wwd.com/sustainability/)Expand sustainability menu
+
+  - [Business](https://wwd.com/sustainability/business/)
+  - [Environment](https://wwd.com/sustainability/environment/)
+  - [Social Impact](https://wwd.com/sustainability/social-impact/)
+  - [Materials](https://wwd.com/sustainability/materials/)
+  - [Innovation](https://wwd.com/sustainability/innovation/)
+- ### [Home/Design](https://wwd.com/home-design/)Expand home-design menu
+
+  - [Interior Design](https://wwd.com/home-design/interior-design/)
+  - [Furniture](https://wwd.com/home-design/furniture/)
+  - [Lighting](https://wwd.com/home-design/lighting/)
+  - [Architecture](https://wwd.com/home-design/architecture/)
+  - [Materials](https://wwd.com/home-design/materials/)
+  - [Home Decor](https://wwd.com/home-design/home-decor/)
+- ### [WWD Weekend](https://wwd.com/p/wwd-weekend/)Expand wwd-weekend menu
+
+- ### [Special Series](https://wwd.com/)Expand special-series menu
+
+  - [Awards Shows](https://wwd.com/p/golden-globes-red-carpet/)
+  - [WWD Celebrates Hispanic Heritage Month](https://wwd.com/p/wwd-hispanic-heritage-month-fashion-culture/)
+  - [Leading Voices in Fashion and Beauty](https://wwd.com/p/womens-empowerment-fashion-beauty-shoe-industry/)
+  - [Video](https://wwd.com/videos/)
+  - [Podcast](https://wwd.com/voices/)
+  - [Studio](https://wwd.com/tag/fairchild-studio/)
+  - [RetailRx Community](https://wwd.com/h/getzler-henrich-retailrx/)
+- ### [Events](https://events.fairchildlive.com/)Expand events menu
+
+  - [Fairchild Live](https://events.fairchildlive.com/)
+- ### [Eye](https://wwd.com/eye/)Expand eye menu
+
+  - [Parties](https://wwd.com/eye/parties/)
+  - [People](https://wwd.com/eye/people/)
+  - [Lifestyle](https://wwd.com/eye/lifestyle/)
+  - [Celebrity Real Estate](https://wwd.com/eye/celebrity-real-estate/)
+- ### [Shop](https://wwd.com/shop/)Expand shop menu
+
+  - [Beauty](https://wwd.com/shop/shop-beauty/)
+  - [Fashion](https://wwd.com/shop/shop-fashion/)
+  - [Home](https://wwd.com/shop/shop-home/)
+  - [Shoes](https://wwd.com/shop/shop-shoes/)
+
+ad
